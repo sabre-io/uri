@@ -7,7 +7,7 @@ php:
   - hhvm
 
 script:
-  - ./bin/phpunit --configuration tests/phpunit.xml
+  - ./bin/phpunit --configuration tests/phpunit.xml.dist
   - ./bin/phpcs  -p --standard=tests/phpcs/ruleset.xml lib/
 
 before_script: composer install --dev
