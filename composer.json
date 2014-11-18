@@ -30,6 +30,10 @@
         }
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit" : "*"
+    },
+    "config" : {
+        "bin-dir" : "bin/"
     }
 }
