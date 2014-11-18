@@ -3,93 +3,24 @@
 namespace Sabre\Uri;
 
 /**
- * Encodes the path of a url.
- *
- * slashes (/) are treated as path-separators.
- *
- * @param string $path
- * @return string
- */
-function encodePath($path) {
-
-    return preg_replace_callback('/([^A-Za-z0-9_\-\.~\(\)\/:@])/',function($match) {
-
-        return '%'.sprintf('%02x',ord($match[0]));
-
-    }, $path);
-
-}
-
-/**
- * Encodes a 1 segment of a path
- *
- * Slashes are considered part of the name, and are encoded as %2f
- *
- * @param string $pathSegment
- * @return string
- */
-function encodePathSegment($pathSegment) {
-
-    return preg_replace_callback('/([^A-Za-z0-9_\-\.~\(\):@])/',function($match) {
-
-        return '%'.sprintf('%02x',ord($match[0]));
-
-    }, $pathSegment);
-}
-
-/**
- * Decodes a url-encoded path
- *
- * @param string $path
- * @return string
- */
-function decodePath($path) {
-
-    return decodePathSegment($path);
-
-}
-
-/**
- * Decodes a url-encoded path segment
- *
- * @param string $path
- * @return string
- */
-function decodePathSegment($path) {
-
-    $path = rawurldecode($path);
-    $encoding = mb_detect_encoding($path, array('UTF-8','ISO-8859-1'));
-
-    switch($encoding) {
-
-        case 'ISO-8859-1' :
-            $path = utf8_encode($path);
-
-    }
-
-    return $path;
-
-}
-
-/**
  * Returns the 'dirname' and 'basename' for a path.
  *
  * The reason there is a custom function for this purpose, is because
- * basename() is locale aware (behaviour changes if C locale or a UTF-8 locale is used)
- * and we need a method that just operates on UTF-8 characters.
+ * basename() is locale aware (behaviour changes if C locale or a UTF-8 locale
+ * is used) and we need a method that just operates on UTF-8 characters.
  *
- * In addition basename and dirname are platform aware, and will treat backslash (\) as a
- * directory separator on windows.
+ * In addition basename and dirname are platform aware, and will treat
+ * backslash (\) as a directory separator on windows.
  *
  * This method returns the 2 components as an array.
  *
- * If there is no dirname, it will return an empty string. Any / appearing at the end of the
- * string is stripped off.
+ * If there is no dirname, it will return an empty string. Any / appearing at
+ * the end of the string is stripped off.
  *
  * @param string $path
  * @return array
  */
-function splitPath($path) {
+function split($path) {
 
     $matches = array();
     if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u',$path,$matches)) {
