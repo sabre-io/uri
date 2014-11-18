@@ -2,7 +2,9 @@
     "name": "sabre/uri",
     "description": "Functions that help with uris.",
     "keywords": [
-        "Uri"
+        "Uri",
+        "Url",
+        "rfc3986"
     ],
     "homepage": "http://sabre.io/uri/",
     "license": "BSD-3-Clause",
