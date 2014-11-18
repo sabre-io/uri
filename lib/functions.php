@@ -94,7 +94,7 @@ function resolve($basePath, $newPath) {
     }
     // Removing .. and .
     $pathParts = explode('/', $path);
-    $newPathParts = array();
+    $newPathParts = [];
     foreach($pathParts as $pathPart) {
 
         switch($pathPart) {
