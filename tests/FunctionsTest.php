@@ -6,27 +6,27 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase{
 
     function testSplit() {
 
-        $strings = array(
+        $strings = [
 
             // input                    // expected result
-            '/foo/bar'                 => array('/foo','bar'),
-            '/foo/bar/'                => array('/foo','bar'),
-            'foo/bar/'                 => array('foo','bar'),
-            'foo/bar'                  => array('foo','bar'),
-            'foo/bar/baz'              => array('foo/bar','baz'),
-            'foo/bar/baz/'             => array('foo/bar','baz'),
-            'foo'                      => array('','foo'),
-            'foo/'                     => array('','foo'),
-            '/foo/'                    => array('','foo'),
-            '/foo'                     => array('','foo'),
-            ''                         => array(null,null),
+            '/foo/bar'                 => ['/foo','bar'],
+            '/foo/bar/'                => ['/foo','bar'],
+            'foo/bar/'                 => ['foo','bar'],
+            'foo/bar'                  => ['foo','bar'],
+            'foo/bar/baz'              => ['foo/bar','baz'],
+            'foo/bar/baz/'             => ['foo/bar','baz'],
+            'foo'                      => ['','foo'],
+            'foo/'                     => ['','foo'],
+            '/foo/'                    => ['','foo'],
+            '/foo'                     => ['','foo'],
+            ''                         => [null,null],
 
             // UTF-8
-            "/\xC3\xA0fo\xC3\xB3/bar"  => array("/\xC3\xA0fo\xC3\xB3",'bar'),
-            "/\xC3\xA0foo/b\xC3\xBCr/" => array("/\xC3\xA0foo","b\xC3\xBCr"),
-            "foo/\xC3\xA0\xC3\xBCr"    => array("foo","\xC3\xA0\xC3\xBCr"),
+            "/\xC3\xA0fo\xC3\xB3/bar"  => ["/\xC3\xA0fo\xC3\xB3",'bar'],
+            "/\xC3\xA0foo/b\xC3\xBCr/" => ["/\xC3\xA0foo","b\xC3\xBCr"],
+            "foo/\xC3\xA0\xC3\xBCr"    => ["foo","\xC3\xA0\xC3\xBCr"],
 
-        );
+        ];
 
         foreach($strings as $input => $expected) {
 

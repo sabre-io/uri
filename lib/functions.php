@@ -22,11 +22,11 @@ namespace Sabre\Uri;
  */
 function split($path) {
 
-    $matches = array();
+    $matches = [];
     if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u',$path,$matches)) {
-        return array($matches[1],$matches[2]);
+        return [$matches[1], $matches[2]];
     } else {
-        return array(null,null);
+        return [null,null];
     }
 
 }
