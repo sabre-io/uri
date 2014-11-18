@@ -2,7 +2,7 @@ sabre/uri
 =========
 
 Functions that help with uris.
-/
+
 
 Installation
 ------------
@@ -20,7 +20,7 @@ This package provides 2 functions:
 1. `resolve`
 2. `splitPath`
 
-### `resolve`
+### resolve
 
 Resolves a relative url based on another url.
 
