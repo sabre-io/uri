@@ -50,13 +50,21 @@ without being affected by locale settings.
     echo $parent, " ", $baseName;
     // output : http://example.org/foo bar
 
+    list(
+        $parent,
+        $baseName
+    ) = split('directory/file');
+
+    echo $parent, " ", $baseName;
+    // output : directory file
+
 * Unlike dirname/basename, this method only treats `/` as a directory
   separator.
 * Unlike dirname/basename, the behavior of this method does not change
   depending on the system's locale setting.
 * Slashes appearing at the end of the path input path will be ignored.
-* If there's no 'dirname' part, an empty string will be returned, unlike
-  dirname, which would return a `.`.
+* If there's no 'dirname' part, because the path only has a single relative
+  component, an empty string will be returned.
 
 
 Build status
