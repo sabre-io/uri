@@ -14,6 +14,6 @@ class Uri {
     /**
      * Full version number
      */
-    const VERSION = '0.0.1';
+    const VERSION = '0.0.2';
 
 }
