@@ -2,16 +2,16 @@
 
 namespace Sabre\Uri;
 
-class BuildUriTest extends \PHPUnit_Framework_TestCase{
+class BuildTest extends \PHPUnit_Framework_TestCase{
 
     /**
      * @dataProvider buildUriData
      */
-    function testBuildUri($value) {
+    function testBuild($value) {
 
         $this->assertEquals(
             $value,
-            buildUri(parse_url($value))
+            build(parse_url($value))
         );
 
     }

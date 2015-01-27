@@ -14,8 +14,8 @@ namespace Sabre\Uri;
  */
 function resolve($basePath, $newPath) {
 
-    $base = parse_url($basePath);
-    $delta = parse_url($newPath);
+    $base = parse($basePath);
+    $delta = parse($newPath);
 
     $pick = function($part) use ($base, $delta) {
 
@@ -82,7 +82,7 @@ function resolve($basePath, $newPath) {
     if (isset($delta['fragment'])) {
         $newParts['fragment'] = $delta['fragment'];
     }
-    return buildUri($newParts);
+    return build($newParts);
 
 }
 
@@ -100,7 +100,7 @@ function resolve($basePath, $newPath) {
  */
 function normalize($uri) {
 
-    $parts = parse_url($uri);
+    $parts = parse($uri);
 
     if (!empty($parts['path'])) {
         $pathParts = explode('/', ltrim($parts['path'], '/'));
@@ -148,16 +148,32 @@ function normalize($uri) {
 
     if (isset($parts['host'])) $parts['host'] = strtolower($parts['host']);
 
-    return buildUri($parts);
+    return build($parts);
 
 }
 
+/**
+ * Parses a URI and returns its individual components.
+ *
+ * This is an alias of PHP's parse_url.
+ *
+ * @param string $uri
+ * @return array
+ */
+function parse($uri) {
+
+    return parse_url($uri);
+
+}
 
 /**
  * This function takes the components returned from PHP's parse_url, and uses
  * it to generate a new uri.
+ *
+ * @param array $parts
+ * @return string
  */
-function buildUri($parts) {
+function build(array $parts) {
 
     $uri = '';
 
