@@ -3,35 +3,6 @@
 namespace Sabre\Uri;
 
 /**
- * Returns the 'dirname' and 'basename' for a path.
- *
- * The reason there is a custom function for this purpose, is because
- * basename() is locale aware (behaviour changes if C locale or a UTF-8 locale
- * is used) and we need a method that just operates on UTF-8 characters.
- *
- * In addition basename and dirname are platform aware, and will treat
- * backslash (\) as a directory separator on windows.
- *
- * This method returns the 2 components as an array.
- *
- * If there is no dirname, it will return an empty string. Any / appearing at
- * the end of the string is stripped off.
- *
- * @param string $path
- * @return array
- */
-function split($path) {
-
-    $matches = [];
-    if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u',$path,$matches)) {
-        return [$matches[1], $matches[2]];
-    } else {
-        return [null,null];
-    }
-
-}
-
-/**
  * Resolves relative urls, like a browser would.
  *
  * This function takes a basePath, which itself _may_ also be relative, and
@@ -222,5 +193,34 @@ function buildUri($parts) {
     }
 
     return $uri;
+
+}
+
+/**
+ * Returns the 'dirname' and 'basename' for a path.
+ *
+ * The reason there is a custom function for this purpose, is because
+ * basename() is locale aware (behaviour changes if C locale or a UTF-8 locale
+ * is used) and we need a method that just operates on UTF-8 characters.
+ *
+ * In addition basename and dirname are platform aware, and will treat
+ * backslash (\) as a directory separator on windows.
+ *
+ * This method returns the 2 components as an array.
+ *
+ * If there is no dirname, it will return an empty string. Any / appearing at
+ * the end of the string is stripped off.
+ *
+ * @param string $path
+ * @return array
+ */
+function split($path) {
+
+    $matches = [];
+    if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u',$path,$matches)) {
+        return [$matches[1], $matches[2]];
+    } else {
+        return [null,null];
+    }
 
 }
