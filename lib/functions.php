@@ -58,23 +58,11 @@ function resolve($basePath, $newPath) {
 
     };
 
-    $url = '';
-    $scheme = $pick('scheme');
-    $host = $pick('host');
+    $newParts = [];
 
-    if ($scheme) {
-        // If there's a scheme, there's also a host.
-        $url=$scheme.'://' . $host;
-    } elseif (!$scheme && $host) {
-        // No scheme, but there is a host.
-        $url = '//' . $host;
-    }
-
-    $port = $pick('port');
-    if ($port) {
-        // tcp port.
-        $url.=':' . $port;
-    }
+    $newParts['scheme'] = $pick('scheme');
+    $newParts['host']   = $pick('host');
+    $newParts['port']   = $pick('port');
 
     $path = '';
     if (isset($delta['path'])) {
@@ -98,7 +86,7 @@ function resolve($basePath, $newPath) {
     foreach($pathParts as $pathPart) {
 
         switch($pathPart) {
-            case '' :
+            //case '' :
             case '.' :
                 break;
             case '..' :
@@ -110,20 +98,129 @@ function resolve($basePath, $newPath) {
         }
     }
 
-    $url.='/' . implode('/', $newPathParts);
+    $path = implode('/', $newPathParts);
 
     // If the source url ended with a /, we want to preserve that.
-    if (substr($path, -1) === '/' && $path!=='/') {
-        $url.='/';
-    }
-
+    $newParts['path'] = $path;
     if (isset($delta['query'])) {
-        $url.='?' . $delta['query'];
+        $newParts['query'] = $delta['query'];
+    } elseif (!empty($base['query']) && empty($delta['host']) && empty($delta['path'])) {
+        // Keep the old query if host and path didn't change
+        $newParts['query'] = $base['query'];
     }
     if (isset($delta['fragment'])) {
-        $url.='#' . $delta['fragment'];
+        $newParts['fragment'] = $delta['fragment'];
+    }
+    return buildUri($newParts);
+
+}
+
+/**
+ * Takes a URI or partial URI as its argument, and normalizes it.
+ *
+ * After normalizing a URI, you can safely compare it to other URIs.
+ * This function will for instance convert a %7E into a tilde, according to
+ * rfc3986.
+ *
+ * It will also change a %3a into a %3A.
+ *
+ * @param string $uri
+ * @return string
+ */
+function normalize($uri) {
+
+    $parts = parse_url($uri);
+
+    if (!empty($parts['path'])) {
+        $pathParts = explode('/', ltrim($parts['path'], '/'));
+        $newPathParts = [];
+        foreach($pathParts as $pathPart) {
+            switch($pathPart) {
+                case '.':
+                    // skip
+                    break;
+                case '..' :
+                    // One level up in the hierarchy
+                    array_pop($newPathParts);
+                    break;
+                default :
+                    // Ensuring that everything is correctly percent-encoded.
+                    $newPathParts[] = rawurlencode(rawurldecode($pathPart));
+                    break;
+            }
+        }
+        $parts['path'] = '/' . implode('/', $newPathParts);
     }
 
-    return $url;
+    if (isset($parts['scheme'])) {
+        $parts['scheme'] = strtolower($parts['scheme']);
+        $defaultPorts = [
+            'http'  => '80',
+            'https' => '443',
+        ];
+
+        if (!empty($parts['port']) && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']]==$parts['port']) {
+            // Removing default ports.
+            unset($parts['port']);
+        }
+        // A few HTTP specific rules.
+        switch($parts['scheme']) {
+            case 'http' :
+            case 'https' :
+                if (empty($parts['path'])) {
+                    // An empty path is equivalent to / in http.
+                    $parts['path'] = '/';
+                }
+                break;
+        }
+    }
+
+    if (isset($parts['host'])) $parts['host'] = strtolower($parts['host']);
+
+    return buildUri($parts);
+
+}
+
+
+/**
+ * This function takes the components returned from PHP's parse_url, and uses
+ * it to generate a new uri.
+ */
+function buildUri($parts) {
+
+    $uri = '';
+
+    $authority = '';
+    if (!empty($parts['host'])) {
+        $authority = $parts['host'];
+        if (!empty($parts['user'])) {
+            $authority = $parts['user'] . '@' . $authority;
+        }
+        if (!empty($parts['port'])) {
+            $authority = $authority . ':' . $parts['port'];
+        }
+    }
+
+    if (!empty($parts['scheme'])) {
+        // If there's a scheme, there's also a host.
+        $uri=$parts['scheme'].'://' . $authority;
+
+    } elseif ($authority) {
+        // No scheme, but there is a host.
+        $uri = '//' . $authority;
+
+    }
+
+    if (!empty($parts['path'])) {
+        $uri.=$parts['path'];
+    }
+    if (!empty($parts['query'])) {
+        $uri.='?' . $parts['query'];
+    }
+    if (!empty($parts['fragment'])) {
+        $uri.='#' . $parts['fragment'];
+    }
+
+    return $uri;
 
 }

@@ -1,8 +1,16 @@
 ChangeLog
 =========
 
-0.0.1-alpha (2014-11-17)
-------------------------
+0.0.2 (2015-??-??)
+------------------
+
+* Added a `normalize` function.
+* Added a `buildUri` function.
+* Fixed a bug in the `resolve` when only a new fragment is specified.
+
+
+0.0.1 (2014-11-17)
+------------------
 
 * First version!
 * Source was lifted from sabre/http package.
