@@ -6,6 +6,7 @@ ChangeLog
 
 * Added a `normalize` function.
 * Added a `buildUri` function.
+* Fixed a bug in the `resolve` when only a new fragment is specified.
 
 
 0.0.1 (2014-11-17)

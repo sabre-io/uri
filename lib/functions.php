@@ -58,23 +58,11 @@ function resolve($basePath, $newPath) {
 
     };
 
-    $url = '';
-    $scheme = $pick('scheme');
-    $host = $pick('host');
+    $newParts = [];
 
-    if ($scheme) {
-        // If there's a scheme, there's also a host.
-        $url=$scheme.'://' . $host;
-    } elseif ($host) {
-        // No scheme, but there is a host.
-        $url = '//' . $host;
-    }
-
-    $port = $pick('port');
-    if ($port) {
-        // tcp port.
-        $url.=':' . $port;
-    }
+    $newParts['scheme'] = $pick('scheme');
+    $newParts['host']   = $pick('host');
+    $newParts['port']   = $pick('port');
 
     $path = '';
     if (isset($delta['path'])) {
@@ -98,7 +86,7 @@ function resolve($basePath, $newPath) {
     foreach($pathParts as $pathPart) {
 
         switch($pathPart) {
-            case '' :
+            //case '' :
             case '.' :
                 break;
             case '..' :
@@ -110,21 +98,20 @@ function resolve($basePath, $newPath) {
         }
     }
 
-    $url.='/' . implode('/', $newPathParts);
+    $path = implode('/', $newPathParts);
 
     // If the source url ended with a /, we want to preserve that.
-    if (substr($path, -1) === '/' && $path!=='/') {
-        $url.='/';
-    }
-
+    $newParts['path'] = $path;
     if (isset($delta['query'])) {
-        $url.='?' . $delta['query'];
-    }
+        $newParts['query'] = $delta['query'];
+    } elseif (!empty($base['query']) && empty($delta['host']) && empty($delta['path'])) {
+        // Keep the old query if host and path didn't change
+        $newParts['query'] = $base['query']; 
+    } 
     if (isset($delta['fragment'])) {
-        $url.='#' . $delta['fragment'];
-    }
-
-    return $url;
+        $newParts['fragment'] = $delta['fragment'];
+    } 
+    return buildUri($newParts);
 
 }
 
