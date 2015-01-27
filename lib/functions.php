@@ -173,7 +173,7 @@ function parse($uri) {
             'user' => null,
             'query' => null,
             'fragment' => null,
-       ];
+        ];
 
 }
 
