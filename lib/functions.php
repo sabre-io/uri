@@ -188,9 +188,6 @@ function normalize($uri) {
         }
     }
 
-
-
-
     if (isset($parts['host'])) $parts['host'] = strtolower($parts['host']);
 
     return buildUri($parts);
@@ -206,18 +203,25 @@ function buildUri($parts) {
 
     $uri = '';
 
-    if (!empty($parts['scheme'])) {
-        // If there's a scheme, there's also a host.
-        $uri=$parts['scheme'].'://' . $parts['host'];
-
-    } elseif (!empty($parts['host'])) {
-        // No scheme, but there is a host.
-        $uri = '//' . $parts['host'];
-
+    $authority = '';
+    if (!empty($parts['host'])) {
+        $authority = $parts['host'];
+        if (!empty($parts['user'])) {
+            $authority = $parts['user'] . '@' . $authority;
+        }
+        if (!empty($parts['port'])) {
+            $authority = $authority . ':' . $parts['port'];
+        }
     }
 
-    if (!empty($parts['port'])) {
-        $uri.=':' . $parts['port'];
+    if (!empty($parts['scheme'])) {
+        // If there's a scheme, there's also a host.
+        $uri=$parts['scheme'].'://' . $authority;
+
+    } elseif ($authority) {
+        // No scheme, but there is a host.
+        $uri = '//' . $authority;
+
     }
 
     if (!empty($parts['path'])) {
