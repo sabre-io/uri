@@ -1,9 +1,9 @@
 {
     "name": "sabre/uri",
-    "description": "Functions that help with uris.",
+    "description": "A PHP library for URI manipulation.",
     "keywords": [
-        "Uri",
-        "Url",
+        "URI",
+        "URL",
         "rfc3986"
     ],
     "homepage": "http://sabre.io/uri/",

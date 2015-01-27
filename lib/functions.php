@@ -19,9 +19,9 @@ function resolve($basePath, $newPath) {
 
     $pick = function($part) use ($base, $delta) {
 
-        if (isset($delta[$part])) {
+        if ($delta[$part]) {
             return $delta[$part];
-        } elseif (isset($base[$part])) {
+        } elseif ($base[$part]) {
             return $base[$part];
         } else {
             return null;
@@ -36,7 +36,7 @@ function resolve($basePath, $newPath) {
     $newParts['port']   = $pick('port');
 
     $path = '';
-    if (isset($delta['path'])) {
+    if ($delta['path']) {
         // If the path starts with a slash
         if ($delta['path'][0]==='/') {
             $path = $delta['path'];
@@ -49,7 +49,7 @@ function resolve($basePath, $newPath) {
             $path.='/' . $delta['path'];
         }
     } else {
-        $path = isset($base['path'])?$base['path']:'/';
+        $path = $base['path']?:'/';
     }
     // Removing .. and .
     $pathParts = explode('/', $path);
@@ -73,13 +73,13 @@ function resolve($basePath, $newPath) {
 
     // If the source url ended with a /, we want to preserve that.
     $newParts['path'] = $path;
-    if (isset($delta['query'])) {
+    if ($delta['query']) {
         $newParts['query'] = $delta['query'];
     } elseif (!empty($base['query']) && empty($delta['host']) && empty($delta['path'])) {
         // Keep the old query if host and path didn't change
         $newParts['query'] = $base['query'];
     }
-    if (isset($delta['fragment'])) {
+    if ($delta['fragment']) {
         $newParts['fragment'] = $delta['fragment'];
     }
     return build($newParts);
@@ -123,7 +123,7 @@ function normalize($uri) {
         $parts['path'] = '/' . implode('/', $newPathParts);
     }
 
-    if (isset($parts['scheme'])) {
+    if ($parts['scheme']) {
         $parts['scheme'] = strtolower($parts['scheme']);
         $defaultPorts = [
             'http'  => '80',
@@ -146,7 +146,7 @@ function normalize($uri) {
         }
     }
 
-    if (isset($parts['host'])) $parts['host'] = strtolower($parts['host']);
+    if ($parts['host']) $parts['host'] = strtolower($parts['host']);
 
     return build($parts);
 
@@ -155,14 +155,25 @@ function normalize($uri) {
 /**
  * Parses a URI and returns its individual components.
  *
- * This is an alias of PHP's parse_url.
+ * This method largely behaves the same as PHP's parse_url, except that it will
+ * return an array with all the array keys, including the ones that are not
+ * set by parse_url, which makes it a bit easier to work with.
  *
  * @param string $uri
  * @return array
  */
 function parse($uri) {
 
-    return parse_url($uri);
+    return
+        parse_url($uri) + [
+            'scheme' => null,
+            'host' => null,
+            'path' => null,
+            'port' => null,
+            'user' => null,
+            'query' => null,
+            'fragment' => null,
+       ];
 
 }
 
