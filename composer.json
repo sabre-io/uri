@@ -1,6 +1,6 @@
 {
     "name": "sabre/uri",
-    "description": "A PHP library for URI manipulation.",
+    "description": "Functions for making sense out of URIs.",
     "keywords": [
         "URI",
         "URL",

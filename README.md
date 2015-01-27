@@ -1,70 +1,28 @@
 sabre/uri
 =========
 
-Functions that help with uris.
+sabre/uri is a lightweight library that provides several functions for working
+with URIs, staying true to the rules of [RFC3986][2].
+
+Partially inspired by [Node.js URL library][3], and created to solve real
+problems in PHP applications. 100% unitested and many tests are based on
+examples from RFC3986.
+
+The library provides the following functions:
+
+1. `resolve` to resolve relative urls.
+2. `normalize` to aid in comparing urls.
+3. `parse`, which works like PHP's [parse_url][6].
+4. `build` to do the exact opposite of `parse`.
+5. `split` to easily get the 'dirname' and 'basename' of a URL without all the
+   problems those two functions have.
 
 
-Installation
-------------
+Further reading
+---------------
 
-Make sure you have [composer][3] installed, and then run:
-
-    composer require sabre/uri
-
-
-Usage
------
-
-This package provides 2 functions:
-
-1. `resolve`
-2. `splitPath`
-
-### resolve
-
-Resolves a relative url based on another url.
-
-    Sabre\Uri::resolve(
-        'http://example.org/foo/bar/',
-        '/'
-    );
-    // Result: http://example.org/
-
-    Sabre\Uri::resolve(
-        '/foo/',
-        '?a=b'
-    );
-    // Result: /foo/?a=b
-
-
-### split
-
-This is a combination of PHP's [`dirname`][6] and [`basename`][7],
-without being affected by locale settings.
-
-    list(
-        $parent,
-        $baseName
-    ) = split('http://example.org/foo/bar');
-
-    echo $parent, " ", $baseName;
-    // output : http://example.org/foo bar
-
-    list(
-        $parent,
-        $baseName
-    ) = split('directory/file');
-
-    echo $parent, " ", $baseName;
-    // output : directory file
-
-* Unlike dirname/basename, this method only treats `/` as a directory
-  separator.
-* Unlike dirname/basename, the behavior of this method does not change
-  depending on the system's locale setting.
-* Slashes appearing at the end of the path input path will be ignored.
-* If there's no 'dirname' part, because the path only has a single relative
-  component, an empty string will be returned.
+* [Installation][7]
+* [Usage][8]
 
 
 Build status
@@ -88,8 +46,10 @@ Made at fruux
 This library is being developed by [fruux](https://fruux.com/). Drop us a line for commercial services or enterprise support.
 
 [1]: http://sabre.io/uri/
-[3]: http://getcomposer.org/
+[2]: https://tools.ietf.org/html/rfc3986/
+[3]: http://nodejs.org/api/url.html
 [4]: http://groups.google.com/group/sabredav-discuss
 [5]: https://github.com/fruux/sabre-uri/issues/
-[6]: http://php.net/manual/en/function.dirname.php
-[7]: http://php.net/manual/en/function.basename.php
+[6]: http://php.net/manual/en/function.parse-url.php
+[7]: /uri/install/
+[8]: /uri/usage/
