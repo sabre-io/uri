@@ -106,11 +106,11 @@ function resolve($basePath, $newPath) {
         $newParts['query'] = $delta['query'];
     } elseif (!empty($base['query']) && empty($delta['host']) && empty($delta['path'])) {
         // Keep the old query if host and path didn't change
-        $newParts['query'] = $base['query']; 
-    } 
+        $newParts['query'] = $base['query'];
+    }
     if (isset($delta['fragment'])) {
         $newParts['fragment'] = $delta['fragment'];
-    } 
+    }
     return buildUri($newParts);
 
 }
