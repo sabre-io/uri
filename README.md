@@ -51,5 +51,5 @@ This library is being developed by [fruux](https://fruux.com/). Drop us a line f
 [4]: http://groups.google.com/group/sabredav-discuss
 [5]: https://github.com/fruux/sabre-uri/issues/
 [6]: http://php.net/manual/en/function.parse-url.php
-[7]: /uri/install/
-[8]: /uri/usage/
+[7]: http://sabre.io/uri/install/
+[8]: http://sabre.io/uri/usage/
