@@ -23,10 +23,9 @@ function resolve($basePath, $newPath) {
             return $delta[$part];
         } elseif ($base[$part]) {
             return $base[$part];
-        } else {
-            return null;
         }
-
+        return null;
+        
     };
 
     $newParts = [];
@@ -246,8 +245,7 @@ function split($path) {
     $matches = [];
     if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u',$path,$matches)) {
         return [$matches[1], $matches[2]];
-    } else {
-        return [null,null];
     }
-
+    return [null,null];
+    
 }
