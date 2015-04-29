@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-1.0.1 (2015-??-??)
+1.0.1 (2015-04-28)
 ------------------
 
 * #4: Using php-cs-fixer to automatically enforce conding standards.
