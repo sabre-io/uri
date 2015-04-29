@@ -37,18 +37,18 @@ function resolve($basePath, $newPath) {
     $path = '';
     if ($delta['path']) {
         // If the path starts with a slash
-        if ($delta['path'][0]==='/') {
+        if ($delta['path'][0] === '/') {
             $path = $delta['path'];
         } else {
             // Removing last component from base path.
             $path = $base['path'];
-            if (strpos($path, '/')!==false) {
-                $path = substr($path,0,strrpos($path,'/'));
+            if (strpos($path, '/') !== false) {
+                $path = substr($path, 0, strrpos($path, '/'));
             }
-            $path.='/' . $delta['path'];
+            $path .= '/' . $delta['path'];
         }
     } else {
-        $path = $base['path']?:'/';
+        $path = $base['path'] ?: '/';
     }
     // Removing .. and .
     $pathParts = explode('/', $path);
@@ -129,7 +129,7 @@ function normalize($uri) {
             'https' => '443',
         ];
 
-        if (!empty($parts['port']) && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']]==$parts['port']) {
+        if (!empty($parts['port']) && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']] == $parts['port']) {
             // Removing default ports.
             unset($parts['port']);
         }
@@ -165,12 +165,12 @@ function parse($uri) {
 
     return
         parse_url($uri) + [
-            'scheme' => null,
-            'host' => null,
-            'path' => null,
-            'port' => null,
-            'user' => null,
-            'query' => null,
+            'scheme'   => null,
+            'host'     => null,
+            'path'     => null,
+            'port'     => null,
+            'user'     => null,
+            'query'    => null,
             'fragment' => null,
         ];
 
@@ -200,7 +200,7 @@ function build(array $parts) {
 
     if (!empty($parts['scheme'])) {
         // If there's a scheme, there's also a host.
-        $uri=$parts['scheme'].'://' . $authority;
+        $uri = $parts['scheme'] . '://' . $authority;
 
     } elseif ($authority) {
         // No scheme, but there is a host.
@@ -209,13 +209,13 @@ function build(array $parts) {
     }
 
     if (!empty($parts['path'])) {
-        $uri.=$parts['path'];
+        $uri .= $parts['path'];
     }
     if (!empty($parts['query'])) {
-        $uri.='?' . $parts['query'];
+        $uri .= '?' . $parts['query'];
     }
     if (!empty($parts['fragment'])) {
-        $uri.='#' . $parts['fragment'];
+        $uri .= '#' . $parts['fragment'];
     }
 
     return $uri;
@@ -243,7 +243,7 @@ function build(array $parts) {
 function split($path) {
 
     $matches = [];
-    if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u',$path,$matches)) {
+    if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u', $path, $matches)) {
         return [$matches[1], $matches[2]];
     }
     return [null,null];
