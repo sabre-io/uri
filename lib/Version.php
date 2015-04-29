@@ -9,7 +9,7 @@ namespace Sabre\Uri;
  * @author Evert Pot (http://evertpot.com/)
  * @license http://sabre.io/license/
  */
-class Uri {
+class Version {
 
     /**
      * Full version number
