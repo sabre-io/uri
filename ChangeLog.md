@@ -5,6 +5,7 @@ ChangeLog
 ------------------
 
 * #4: Using php-cs-fixer to automatically enforce conding standards.
+* #5: Resolving to and building `mailto:` urls were not correctly handled.
 
 
 1.0.0 (2015-01-27)

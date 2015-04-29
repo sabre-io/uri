@@ -69,6 +69,13 @@ class ResolveTest extends \PHPUnit_Framework_TestCase{
                 '#comments',
                 'https://example.org/foo?a=b#comments',
             ],
+            // Switching to mailto!
+            [
+                'https://example.org/foo?a=b',
+                'mailto:foo@example.org',
+                'mailto:foo@example.org',
+            ],
+
         ];
 
     }

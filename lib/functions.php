@@ -28,6 +28,12 @@ function resolve($basePath, $newPath) {
         
     };
 
+    // If the new path defines a scheme, it's absolute and we can just return
+    // that.
+    if ($delta['scheme']) {
+        return build($delta);
+    }
+
     $newParts = [];
 
     $newParts['scheme'] = $pick('scheme');
@@ -200,11 +206,12 @@ function build(array $parts) {
 
     if (!empty($parts['scheme'])) {
         // If there's a scheme, there's also a host.
-        $uri = $parts['scheme'] . '://' . $authority;
+        $uri = $parts['scheme'] . ':';
 
-    } elseif ($authority) {
+    }
+    if ($authority) {
         // No scheme, but there is a host.
-        $uri = '//' . $authority;
+        $uri .= '//' . $authority;
 
     }
 
