@@ -59,9 +59,9 @@ function resolve($basePath, $newPath) {
     // Removing .. and .
     $pathParts = explode('/', $path);
     $newPathParts = [];
-    foreach($pathParts as $pathPart) {
+    foreach ($pathParts as $pathPart) {
 
-        switch($pathPart) {
+        switch ($pathPart) {
             //case '' :
             case '.' :
                 break;
@@ -110,8 +110,8 @@ function normalize($uri) {
     if (!empty($parts['path'])) {
         $pathParts = explode('/', ltrim($parts['path'], '/'));
         $newPathParts = [];
-        foreach($pathParts as $pathPart) {
-            switch($pathPart) {
+        foreach ($pathParts as $pathPart) {
+            switch ($pathPart) {
                 case '.':
                     // skip
                     break;
@@ -140,7 +140,7 @@ function normalize($uri) {
             unset($parts['port']);
         }
         // A few HTTP specific rules.
-        switch($parts['scheme']) {
+        switch ($parts['scheme']) {
             case 'http' :
             case 'https' :
                 if (empty($parts['path'])) {
@@ -250,7 +250,7 @@ function build(array $parts) {
 function split($path) {
 
     $matches = [];
-    if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u', $path, $matches)) {
+    if (preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u', $path, $matches)) {
         return [$matches[1], $matches[2]];
     }
     return [null,null];
