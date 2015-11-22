@@ -9,7 +9,7 @@
     "homepage": "http://sabre.io/uri/",
     "license": "BSD-3-Clause",
     "require": {
-        "php": ">=5.4.7"
+        "php": ">=7"
     },
     "authors": [
         {

@@ -12,7 +12,7 @@ namespace Sabre\Uri;
  * @param string $newPath
  * @return string
  */
-function resolve($basePath, $newPath) {
+function resolve(string $basePath, string $newPath) : string {
 
     $base = parse($basePath);
     $delta = parse($newPath);
@@ -103,7 +103,7 @@ function resolve($basePath, $newPath) {
  * @param string $uri
  * @return string
  */
-function normalize($uri) {
+function normalize(string $uri) : string {
 
     $parts = parse($uri);
 
@@ -167,7 +167,7 @@ function normalize($uri) {
  * @param string $uri
  * @return array
  */
-function parse($uri) {
+function parse(string $uri) : array {
 
     return
         parse_url($uri) + [
@@ -189,7 +189,7 @@ function parse($uri) {
  * @param array $parts
  * @return string
  */
-function build(array $parts) {
+function build(array $parts) : string {
 
     $uri = '';
 
@@ -247,7 +247,7 @@ function build(array $parts) {
  * @param string $path
  * @return array
  */
-function split($path) {
+function split(string $path) : array {
 
     $matches = [];
     if (preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u', $path, $matches)) {
