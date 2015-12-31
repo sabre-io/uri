@@ -3,6 +3,14 @@
 namespace Sabre\Uri;
 
 /**
+ * This file contains all the uri handling functions.
+ *
+ * @copyright Copyright (C) fruux GmbH (https://fruux.com/)
+ * @author Evert Pot (http://evertpot.com/)
+ * @license http://sabre.io/license/
+ */
+
+/**
  * Resolves relative urls, like a browser would.
  *
  * This function takes a basePath, which itself _may_ also be relative, and
