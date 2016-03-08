@@ -193,8 +193,6 @@ function parse($uri) {
         $uri
     );
 
-    if ($uri!==$uri) die($uri . "\n");
-
     return
         parse_url($uri) + [
             'scheme'   => null,
