@@ -22,12 +22,12 @@ class ParseTest extends \PHPUnit_Framework_TestCase{
             [
                 'http://example.org/hello?foo=bar#test',
                 [
-                    'scheme'    => 'http',
-                    'host'      => 'example.org',
-                    'path'      => '/hello',
-                    'port'      => null,
-                    'user'      => null,
-                    'query'     => 'foo=bar',
+                    'scheme'   => 'http',
+                    'host'     => 'example.org',
+                    'path'     => '/hello',
+                    'port'     => null,
+                    'user'     => null,
+                    'query'    => 'foo=bar',
                     'fragment' => 'test'
                 ]
             ],
