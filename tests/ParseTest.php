@@ -24,11 +24,11 @@ class ParseTest extends \PHPUnit_Framework_TestCase{
                 [
                     'scheme'    => 'http',
                     'host'      => 'example.org',
-                    'path'      => '/',
+                    'path'      => '/hello',
                     'port'      => null,
                     'user'      => null,
                     'query'     => 'foo=bar',
-                    'fragement' => 'test'
+                    'fragment' => 'test'
                 ]
             ],
             // See issue #6. parse_url corrupts strings like this, but only on
