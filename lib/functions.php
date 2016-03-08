@@ -33,7 +33,7 @@ function resolve($basePath, $newPath) {
             return $base[$part];
         }
         return null;
-        
+
     };
 
     // If the new path defines a scheme, it's absolute and we can just return
@@ -172,10 +172,28 @@ function normalize($uri) {
  * return an array with all the array keys, including the ones that are not
  * set by parse_url, which makes it a bit easier to work with.
  *
+ * Unlike PHP's parse_url, it will also convert any non-ascii characters to
+ * percent-encoded strings. PHP's parse_url corrupts these characters on OS X.
+ *
  * @param string $uri
  * @return array
  */
 function parse($uri) {
+
+    // Normally a URI must be ASCII, however. However, often it's not and
+    // parse_url might corrupt these strings.
+    //
+    // For that reason we take any non-ascii characters from the uri and
+    // uriencode them first.
+    $uri = preg_replace_callback(
+        '/[^[:ascii:]]/u',
+        function($matches) {
+            return rawurlencode($matches[0]);
+        },
+        $uri
+    );
+
+    if ($uri!==$uri) die($uri . "\n");
 
     return
         parse_url($uri) + [
@@ -262,5 +280,5 @@ function split($path) {
         return [$matches[1], $matches[2]];
     }
     return [null,null];
-    
+
 }

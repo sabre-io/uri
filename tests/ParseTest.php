@@ -38,8 +38,7 @@ class ParseTest extends \PHPUnit_Framework_TestCase{
                 [
                     'scheme'   => 'http',
                     'host'     => 'example.org',
-                    //'path'     => '/%E6%9C%89%E8%AF%8D%E6%B3%95%E5%88%AB%E5%90%8D.zh',
-                    'path'     => '/%有词法别名.zh',
+                    'path'     => '/%E6%9C%89%E8%AF%8D%E6%B3%95%E5%88%AB%E5%90%8D.zh',
                     'port'     => null,
                     'user'     => null,
                     'query'    => null,

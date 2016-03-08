@@ -1,6 +1,14 @@
 ChangeLog
 =========
 
+1.1.0 (2016-03-07)
+------------------
+
+* #6: PHP's `parse_url()` corrupts strings if they contain certain
+  non ascii-characters such as Chinese or Hebrew. sabre/uri's `parse()`
+  function now percent-encodes these characters beforehand.
+
+
 1.0.1 (2015-04-28)
 ------------------
 
