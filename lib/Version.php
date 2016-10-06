@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Sabre\Uri;
 
@@ -14,6 +14,6 @@ class Version {
     /**
      * Full version number
      */
-    const VERSION = '1.1.0';
+    const VERSION = '2.0.0';
 
 }
