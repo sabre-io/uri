@@ -45,8 +45,8 @@ function resolve(string $basePath, string $newPath) : string {
     $newParts = [];
 
     $newParts['scheme'] = $pick('scheme');
-    $newParts['host']   = $pick('host');
-    $newParts['port']   = $pick('port');
+    $newParts['host'] = $pick('host');
+    $newParts['port'] = $pick('port');
 
     $path = '';
     if ($delta['path']) {
