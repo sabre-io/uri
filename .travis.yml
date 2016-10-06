@@ -6,5 +6,6 @@ script:
   - ./bin/phpunit --configuration tests/phpunit.xml.dist
   - ./bin/sabre-cs-fixer fix lib/ --dry-run --diff
 
-before_script: composer install --dev
-
+before_script:
+  - rm -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+  - composer install

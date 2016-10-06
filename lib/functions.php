@@ -3,6 +3,14 @@
 namespace Sabre\Uri;
 
 /**
+ * This file contains all the uri handling functions.
+ *
+ * @copyright Copyright (C) fruux GmbH (https://fruux.com/)
+ * @author Evert Pot (http://evertpot.com/)
+ * @license http://sabre.io/license/
+ */
+
+/**
  * Resolves relative urls, like a browser would.
  *
  * This function takes a basePath, which itself _may_ also be relative, and
@@ -25,7 +33,7 @@ function resolve(string $basePath, string $newPath) : string {
             return $base[$part];
         }
         return null;
-        
+
     };
 
     // If the new path defines a scheme, it's absolute and we can just return
@@ -164,10 +172,26 @@ function normalize(string $uri) : string {
  * return an array with all the array keys, including the ones that are not
  * set by parse_url, which makes it a bit easier to work with.
  *
+ * Unlike PHP's parse_url, it will also convert any non-ascii characters to
+ * percent-encoded strings. PHP's parse_url corrupts these characters on OS X.
+ *
  * @param string $uri
  * @return array
  */
 function parse(string $uri) : array {
+
+    // Normally a URI must be ASCII, however. However, often it's not and
+    // parse_url might corrupt these strings.
+    //
+    // For that reason we take any non-ascii characters from the uri and
+    // uriencode them first.
+    $uri = preg_replace_callback(
+        '/[^[:ascii:]]/u',
+        function($matches) {
+            return rawurlencode($matches[0]);
+        },
+        $uri
+    );
 
     return
         parse_url($uri) + [
@@ -254,5 +278,5 @@ function split(string $path) : array {
         return [$matches[1], $matches[2]];
     }
     return [null,null];
-    
+
 }
