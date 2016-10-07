@@ -1,6 +1,13 @@
 ChangeLog
 =========
 
+2.0.0 (2016-10-06)
+-----------------
+
+* Requires PHP 7.
+* Added type-hints where relevant.
+
+
 1.1.0 (2016-03-07)
 ------------------
 
