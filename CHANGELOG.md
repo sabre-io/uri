@@ -1,6 +1,12 @@
 ChangeLog
 =========
 
+2.0.1 (2016-10-27)
+------------------
+
+* #10: Correctly support `file://` URIs in the build() method. (@yuloh)
+
+
 2.0.0 (2016-10-06)
 -----------------
 
