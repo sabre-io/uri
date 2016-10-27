@@ -32,6 +32,8 @@ class BuildTest extends \PHPUnit_Framework_TestCase{
             ['/hi?a=b#c=d'],
             ['?a=b#c=d'],
             ['#c=d'],
+            ['file:///etc/hosts'],
+            ['file://localhost/etc/hosts'],
         ];
 
     }

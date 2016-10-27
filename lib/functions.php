@@ -233,7 +233,7 @@ function build(array $parts) {
         $uri = $parts['scheme'] . ':';
 
     }
-    if ($authority) {
+    if ($authority || (!empty($parts['scheme']) && $parts['scheme'] === 'file')) {
         // No scheme, but there is a host.
         $uri .= '//' . $authority;
 
