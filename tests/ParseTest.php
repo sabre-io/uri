@@ -45,6 +45,19 @@ class ParseTest extends \PHPUnit_Framework_TestCase{
                     'fragment' => null
                 ]
             ],
+            [
+                'ftp://user:password@ftp.example.org/',
+                [
+                    'scheme'   => 'ftp',
+                    'host'     => 'ftp.example.org',
+                    'path'     => '/',
+                    'port'     => null,
+                    'user'     => 'user',
+                    'pass'     => 'password',
+                    'query'    => null,
+                    'fragment' => null,
+                ]
+            ],
 
         ];
 
