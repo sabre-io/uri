@@ -180,13 +180,21 @@ function normalize(string $uri) : string {
  */
 function parse(string $uri) : array {
 
+    if (preg_match('/^[a-zA-Z]*:/u', $uri) === 0) {
+        // if no protocol is given and a colon is present,
+        // we need to encode it to avoid a PHP bug
+        $replaceRegExp = '/(?:[^[:ascii:]]|:)/u';
+    } else {
+        $replaceRegExp = '/[^[:ascii:]]/u';
+    }
+
     // Normally a URI must be ASCII, however. However, often it's not and
     // parse_url might corrupt these strings.
     //
     // For that reason we take any non-ascii characters from the uri and
     // uriencode them first.
     $uri = preg_replace_callback(
-        '/[^[:ascii:]]/u',
+        $replaceRegExp,
         function($matches) {
             return rawurlencode($matches[0]);
         },
