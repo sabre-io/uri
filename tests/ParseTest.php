@@ -58,6 +58,32 @@ class ParseTest extends \PHPUnit_Framework_TestCase{
                     'fragment' => null,
                 ]
             ],
+			// See issue #9, parse_url doesn't like colons followed by numbers even
+			// though they are allowed since RFC 3986
+            [
+                'http://example.org/hello:12?foo=bar#test',
+                [
+                    'scheme'   => 'http',
+                    'host'     => 'example.org',
+                    'path'     => '/hello:12',
+                    'port'     => null,
+                    'user'     => null,
+                    'query'    => 'foo=bar',
+                    'fragment' => 'test'
+                ]
+            ],
+            [
+                '/path/to/colon:34',
+                [
+                    'scheme'   => null,
+                    'host'     => null,
+                    'path'     => '/path/to/colon%3A34',
+                    'port'     => null,
+                    'user'     => null,
+                    'query'    => null,
+                    'fragment' => null,
+                ]
+            ],
 
         ];
 
