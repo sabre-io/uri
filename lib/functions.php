@@ -299,7 +299,7 @@ function split($path) {
  * @param string $uri
  * @return array
  */
-function _parse_fallback(string $uri) : array {
+function _parse_fallback($uri) {
 
     // Normally a URI must be ASCII, however. However, often it's not and
     // parse_url might corrupt these strings.
