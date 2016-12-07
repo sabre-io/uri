@@ -1,6 +1,17 @@
 ChangeLog
 =========
 
+1.2.0 (2016-12-06)
+------------------
+
+* Now throwing `InvalidUriException` if a uri passed to the `parse` function
+  is invalid or could not be parsed.
+* #11: Fix support for URIs that start with a triple slash. PHP's `parse_uri()`
+  doesn't support them, so we now have a pure-php fallback in case it fails.
+* #9: Fix support for relative URI's that have a non-uri encoded colon `:` in
+  them.
+
+
 1.1.1 (2016-10-27)
 ------------------
 
