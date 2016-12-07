@@ -25,14 +25,6 @@ Further reading
 * [Usage][8]
 
 
-Build status
-------------
-
-| branch | status |
-| ------ | ------ |
-| master | [![Build Status](https://travis-ci.org/fruux/sabre-uri.svg?branch=master)](https://travis-ci.org/fruux/sabre-uri) |
-
-
 Questions?
 ----------
 
