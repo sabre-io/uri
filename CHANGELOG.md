@@ -23,7 +23,6 @@ ChangeLog
 
 * Requires PHP 7.
 * Added type-hints where relevant.
-=======
 
 
 1.2.0 (2016-12-06)
