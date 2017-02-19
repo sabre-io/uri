@@ -2,7 +2,7 @@
 
 namespace Sabre\Uri;
 
-class ResolveTest extends \PHPUnit_Framework_TestCase{
+class ResolveTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @dataProvider resolveData

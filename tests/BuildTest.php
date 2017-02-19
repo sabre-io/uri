@@ -2,7 +2,7 @@
 
 namespace Sabre\Uri;
 
-class BuildTest extends \PHPUnit_Framework_TestCase{
+class BuildTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @dataProvider buildUriData

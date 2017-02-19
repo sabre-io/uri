@@ -2,7 +2,7 @@
 
 namespace Sabre\Uri;
 
-class NormalizeTest extends \PHPUnit_Framework_TestCase{
+class NormalizeTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @dataProvider normalizeData

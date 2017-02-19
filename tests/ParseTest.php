@@ -2,7 +2,7 @@
 
 namespace Sabre\Uri;
 
-class ParseTest extends \PHPUnit_Framework_TestCase{
+class ParseTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @dataProvider parseData

@@ -2,7 +2,7 @@
 
 namespace Sabre\Uri;
 
-class SplitTest extends \PHPUnit_Framework_TestCase{
+class SplitTest extends \PHPUnit\Framework\TestCase {
 
     function testSplit() {
 
