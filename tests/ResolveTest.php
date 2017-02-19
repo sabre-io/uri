@@ -77,9 +77,9 @@ class ResolveTest extends \PHPUnit\Framework\TestCase {
             ],
             // Resolving empty path
             [
-                'http://www.example.org',
-                '#foo',
-                'http://www.example.org/#foo',
+                'http://www.example.com',
+                '#',
+                'http://www.example.com/',
             ]
 
         ];
