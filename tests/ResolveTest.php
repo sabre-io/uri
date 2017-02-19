@@ -79,7 +79,7 @@ class ResolveTest extends \PHPUnit\Framework\TestCase {
             [
                 'http://www.example.com',
                 '#',
-                'http://www.example.com/',
+                'http://www.example.com/#',
             ]
 
         ];
