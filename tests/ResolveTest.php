@@ -75,6 +75,18 @@ class ResolveTest extends \PHPUnit_Framework_TestCase{
                 'mailto:foo@example.org',
                 'mailto:foo@example.org',
             ],
+            // Resolving empty path
+            [
+                'http://www.example.org',
+                '#foo',
+                'http://www.example.org/#foo',
+            ],
+            // Another fragment test
+            [
+                'http://example.org/path.json',
+                '#',
+                'http://example.org/path.json',
+            ],
 
         ];
 
