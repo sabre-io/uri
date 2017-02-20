@@ -87,7 +87,11 @@ class ResolveTest extends \PHPUnit_Framework_TestCase{
                 '#',
                 'http://example.org/path.json',
             ],
-
+            [
+                'http://www.example.com',
+                '#',
+                'http://www.example.com/',
+            ]
         ];
 
     }
