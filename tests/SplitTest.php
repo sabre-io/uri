@@ -1,8 +1,8 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Sabre\Uri;
 
-class SplitTest extends \PHPUnit_Framework_TestCase{
+class SplitTest extends \PHPUnit\Framework\TestCase {
 
     function testSplit() {
 

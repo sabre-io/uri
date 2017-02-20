@@ -1,8 +1,8 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Sabre\Uri;
 
-class ResolveTest extends \PHPUnit_Framework_TestCase{
+class ResolveTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @dataProvider resolveData
@@ -76,6 +76,17 @@ class ResolveTest extends \PHPUnit_Framework_TestCase{
                 'mailto:foo@example.org',
             ],
             // Resolving empty path
+            [
+                'http://www.example.org',
+                '#foo',
+                'http://www.example.org/#foo',
+            ],
+            // Another fragment test
+            [
+                'http://example.org/path.json',
+                '#',
+                'http://example.org/path.json',
+            ],
             [
                 'http://www.example.com',
                 '#',

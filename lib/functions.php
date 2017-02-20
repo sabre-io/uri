@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Sabre\Uri;
 
@@ -20,7 +20,7 @@ namespace Sabre\Uri;
  * @param string $newPath
  * @return string
  */
-function resolve($basePath, $newPath) {
+function resolve(string $basePath, string $newPath) : string {
 
     $base = parse($basePath);
     $delta = parse($newPath);
@@ -111,7 +111,7 @@ function resolve($basePath, $newPath) {
  * @param string $uri
  * @return string
  */
-function normalize($uri) {
+function normalize(string $uri) : string {
 
     $parts = parse($uri);
 
@@ -178,7 +178,7 @@ function normalize($uri) {
  * @param string $uri
  * @return array
  */
-function parse($uri) {
+function parse(string $uri) : array {
 
     // Normally a URI must be ASCII, however. However, often it's not and
     // parse_url might corrupt these strings.
@@ -218,7 +218,7 @@ function parse($uri) {
  * @param array $parts
  * @return string
  */
-function build(array $parts) {
+function build(array $parts) : string {
 
     $uri = '';
 
@@ -276,7 +276,7 @@ function build(array $parts) {
  * @param string $path
  * @return array
  */
-function split($path) {
+function split(string $path) : array {
 
     $matches = [];
     if (preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u', $path, $matches)) {
@@ -299,7 +299,7 @@ function split($path) {
  * @param string $uri
  * @return array
  */
-function _parse_fallback($uri) {
+function _parse_fallback(string $uri) : array {
 
     // Normally a URI must be ASCII, however. However, often it's not and
     // parse_url might corrupt these strings.
@@ -333,11 +333,11 @@ function _parse_fallback($uri) {
     }
 
     // Taking off a fragment part
-    if (strpos($uri, '#')) {
+    if (strpos($uri, '#')!==false) {
         list($uri, $result['fragment']) = explode('#', $uri, 2);
     }
     // Taking off the query part
-    if (strpos($uri, '?')) {
+    if (strpos($uri, '?')!==false) {
         list($uri, $result['query']) = explode('?', $uri, 2);
     }
 

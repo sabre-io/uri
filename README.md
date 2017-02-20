@@ -18,6 +18,15 @@ The library provides the following functions:
    problems those two functions have.
 
 
+Build status
+------------
+
+| branch       | status | minimum PHP version |
+| ------------ | ------ | ------------------- |
+| master       | [![Build Status](https://travis-ci.org/fruux/sabre-uri.svg?branch=master)](https://travis-ci.org/fruux/sabre-uri) | PHP 7.0 |
+| 1.x          | [![Build Status](https://travis-ci.org/fruux/sabre-uri.svg?branch=1.x)](https://travis-ci.org/fruux/sabre-uri) | PHP 5.4.7 |
+
+
 Further reading
 ---------------
 

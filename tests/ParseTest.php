@@ -1,8 +1,8 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Sabre\Uri;
 
-class ParseTest extends \PHPUnit_Framework_TestCase{
+class ParseTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @dataProvider parseData
@@ -171,6 +171,20 @@ class ParseTest extends \PHPUnit_Framework_TestCase{
                     'fragment' => null,
                 ]
             ],
+            // Partial url
+            [
+                '#foo',
+                [
+                    'scheme'   => null,
+                    'host'     => null,
+                    'path'     => null,
+                    'port'     => null,
+                    'user'     => null,
+                    'query'    => null,
+                    'fragment' => 'foo',
+                ]
+
+            ]
 
         ];
 
