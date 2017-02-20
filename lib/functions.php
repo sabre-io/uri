@@ -56,7 +56,7 @@ function resolve(string $basePath, string $newPath) : string {
         } else {
             // Removing last component from base path.
             $path = $base['path'];
-            if (strpos($path, '/') !== false) {
+            if (strpos((string)$path, '/') !== false) {
                 $path = substr($path, 0, strrpos($path, '/'));
             }
             $path .= '/' . $delta['path'];
