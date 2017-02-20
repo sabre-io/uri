@@ -33,7 +33,7 @@
     },
     "require-dev": {
         "sabre/cs": "~1.0.0",
-        "phpunit/phpunit" : "*"
+        "phpunit/phpunit" : ">=4.0,<6.0"
     },
     "config" : {
         "bin-dir" : "bin/"
