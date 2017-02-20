@@ -1,6 +1,14 @@
 ChangeLog
 =========
 
+2.1.1 (2017-02-20)
+------------------
+
+* #15: Don't throw an error when resolving a URI which path component is
+  empty.
+* #16: Correctly parse urls that are only a fragment `#`.
+
+
 2.1.0 (2016-12-06)
 ------------------
 
