@@ -80,7 +80,13 @@ class ResolveTest extends \PHPUnit\Framework\TestCase {
                 'http://www.example.org',
                 '#foo',
                 'http://www.example.org/#foo',
-            ]
+            ],
+            // Another fragment test
+            [
+                'http://example.org/path.json',
+                '#',
+                'http://example.org/path.json',
+            ],
 
         ];
 
