@@ -171,6 +171,20 @@ class ParseTest extends \PHPUnit\Framework\TestCase {
                     'fragment' => null,
                 ]
             ],
+            // Parial url
+            [
+                '#foo',
+                [
+                    'scheme'   => null,
+                    'host'     => null,
+                    'path'     => null,
+                    'port'     => null,
+                    'user'     => null,
+                    'query'    => null,
+                    'fragment' => 'foo',
+                ]
+
+            ]
 
         ];
 
