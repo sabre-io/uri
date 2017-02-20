@@ -1,6 +1,12 @@
 ChangeLog
 =========
 
+1.2.1 (2017-02-20)
+------------------
+
+* #16: Correctly parse urls that are only a fragment `#`.
+
+
 1.2.0 (2016-12-06)
 ------------------
 
