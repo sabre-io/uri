@@ -333,11 +333,11 @@ function _parse_fallback($uri) {
     }
 
     // Taking off a fragment part
-    if (strpos($uri, '#')) {
+    if (strpos($uri, '#') !== false) {
         list($uri, $result['fragment']) = explode('#', $uri, 2);
     }
     // Taking off the query part
-    if (strpos($uri, '?')) {
+    if (strpos($uri, '?') !== false) {
         list($uri, $result['query']) = explode('?', $uri, 2);
     }
 
