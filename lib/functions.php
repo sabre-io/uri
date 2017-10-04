@@ -20,6 +20,11 @@ namespace Sabre\Uri;
  * @param string $newPath
  * @return string
  */
+/**
+ * @param string $basePath
+ * @param string $newPath
+ * @return string
+ */
 function resolve($basePath, $newPath) {
 
     $base = parse($basePath);
@@ -42,7 +47,7 @@ function resolve($basePath, $newPath) {
         return build($delta);
     }
 
-    $newParts = [];
+    $newParts = array();
 
     $newParts['scheme'] = $pick('scheme');
     $newParts['host'] = $pick('host');
@@ -66,7 +71,7 @@ function resolve($basePath, $newPath) {
     }
     // Removing .. and .
     $pathParts = explode('/', $path);
-    $newPathParts = [];
+    $newPathParts = array();
     foreach ($pathParts as $pathPart) {
 
         switch ($pathPart) {
@@ -117,7 +122,7 @@ function normalize($uri) {
 
     if (!empty($parts['path'])) {
         $pathParts = explode('/', ltrim($parts['path'], '/'));
-        $newPathParts = [];
+        $newPathParts = array();
         foreach ($pathParts as $pathPart) {
             switch ($pathPart) {
                 case '.':
@@ -138,10 +143,10 @@ function normalize($uri) {
 
     if ($parts['scheme']) {
         $parts['scheme'] = strtolower($parts['scheme']);
-        $defaultPorts = [
+        $defaultPorts = array(
             'http'  => '80',
             'https' => '443',
-        ];
+        );
 
         if (!empty($parts['port']) && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']] == $parts['port']) {
             // Removing default ports.
@@ -199,7 +204,7 @@ function parse($uri) {
     }
 
     return
-         $result + [
+         $result + array(
             'scheme'   => null,
             'host'     => null,
             'path'     => null,
@@ -207,7 +212,7 @@ function parse($uri) {
             'user'     => null,
             'query'    => null,
             'fragment' => null,
-        ];
+         );
 
 }
 
@@ -278,11 +283,11 @@ function build(array $parts) {
  */
 function split($path) {
 
-    $matches = [];
+    $matches = array();
     if (preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u', $path, $matches)) {
-        return [$matches[1], $matches[2]];
+        return array($matches[1], $matches[2]);
     }
-    return [null,null];
+    return array(null,null);
 
 }
 
@@ -314,7 +319,7 @@ function _parse_fallback($uri) {
         $uri
     );
 
-    $result = [
+    $result = array(
         'scheme'   => null,
         'host'     => null,
         'port'     => null,
@@ -322,7 +327,7 @@ function _parse_fallback($uri) {
         'path'     => null,
         'fragment' => null,
         'query'    => null,
-    ];
+    );
 
     if (preg_match('% ^([A-Za-z][A-Za-z0-9+-\.]+): %x', $uri, $matches)) {
 
