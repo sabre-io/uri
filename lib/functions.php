@@ -180,6 +180,9 @@ function normalize(string $uri) : string {
  */
 function parse(string $uri) : array {
 
+    // Replace backslashes
+    $uri = str_replace('\\', '/', $uri);
+    
     // Normally a URI must be ASCII, however. However, often it's not and
     // parse_url might corrupt these strings.
     //
@@ -301,6 +304,9 @@ function split(string $path) : array {
  */
 function _parse_fallback(string $uri) : array {
 
+    // Replace backslashes
+    $uri = str_replace('\\', '/', $uri);
+
     // Normally a URI must be ASCII, however. However, often it's not and
     // parse_url might corrupt these strings.
     //
@@ -348,15 +354,14 @@ function _parse_fallback(string $uri) : array {
       $result['host'] = '';
     } elseif (substr($uri, 0, 2) === '//') {
         // Uris that have an authority part.
-        $regex = '
-          %^
+        $regex = '%^
             //
             (?: (?<user> [^:@]+) (: (?<pass> [^@]+)) @)?
-            (?<host> ( [^:/]* | \[ [^\]]+ \] ))
+            (?<host> ( [^:/]* | \[ [^\]]+ \] )) [:]?
             (?: : (?<port> [0-9]+))?
             (?<path> / .*)?
-          $%x
-        ';
+          $%x';
+          
         if (!preg_match($regex, $uri, $matches)) {
             throw new InvalidUriException('Invalid, or could not parse URI');
         }
