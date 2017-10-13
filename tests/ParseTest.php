@@ -184,6 +184,20 @@ class ParseTest extends \PHPUnit_Framework_TestCase{
                     'fragment' => 'foo',
                 ]
 
+            ],
+            // Backslashes
+            [
+                'file://C:\\abc\\x y z\\lib/dir/file.txt',
+                [
+                    'scheme'   => 'file',
+                    'host'     => 'C',
+                    'path'     => '/abc/x y z/lib/dir/file.txt',
+                    'port'     => null,
+                    'user'     => null,
+                    'query'    => null,
+                    'fragment' => null,
+                ]
+
             ]
 
         ];
