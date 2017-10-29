@@ -103,7 +103,12 @@ class ResolveTest extends \PHPUnit\Framework\TestCase {
                 '#',
                 'http://example.org/path.json',
             ],
-
+            // Windows Paths
+            [
+                'file:///C:/path/file_a.ext',
+                'file_b.ext',
+                'file:///C:/path/file_b.ext',
+            ],
         ];
 
     }

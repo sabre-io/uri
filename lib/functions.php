@@ -197,6 +197,15 @@ function parse(string $uri) : array {
     if (!$result) {
         $result = _parse_fallback($uri);
     }
+    else
+    {
+        // Add empty host and trailing slash to windows file paths (file:///C:/path)
+        if (isset($result['scheme']) && $result['scheme'] === 'file' && isset($result['path']) &&
+             preg_match('/^(?<windows_path> [a-zA-Z]:(\/(?![\/])|\\\\)[^?]*)$/x', $result['path'])) {
+            $result['path'] = '/' . $result['path'];
+            $result['host'] = '';
+        }
+    }
 
     return
          $result + [
@@ -348,15 +357,13 @@ function _parse_fallback(string $uri) : array {
       $result['host'] = '';
     } elseif (substr($uri, 0, 2) === '//') {
         // Uris that have an authority part.
-        $regex = '
-          %^
+        $regex = '%^
             //
             (?: (?<user> [^:@]+) (: (?<pass> [^@]+)) @)?
             (?<host> ( [^:/]* | \[ [^\]]+ \] ))
             (?: : (?<port> [0-9]+))?
             (?<path> / .*)?
-          $%x
-        ';
+          $%x';
         if (!preg_match($regex, $uri, $matches)) {
             throw new InvalidUriException('Invalid, or could not parse URI');
         }
