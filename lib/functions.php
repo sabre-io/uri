@@ -259,6 +259,22 @@ function build(array $parts) : string {
 }
 
 /**
+ * This function replaces segments of a parsed uri using parse and build
+ * to generate a new uri.
+ *
+ * @param string $uri
+ * @param array $replace
+ * @return string
+ */
+function replace(string $uri, array $replace = []) : string {
+
+    $parsed = parse($uri);
+
+    return build(array_merge($parsed, $replace));
+
+}
+
+/**
  * Returns the 'dirname' and 'basename' for a path.
  *
  * The reason there is a custom function for this purpose, is because
