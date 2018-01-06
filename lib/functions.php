@@ -22,9 +22,15 @@ namespace Sabre\Uri;
  */
 function resolve(string $basePath, string $newPath) : string {
 
-    $base = parse($basePath);
     $delta = parse($newPath);
 
+    // If the new path defines a scheme, it's absolute and we can just return
+    // that.
+    if ($delta['scheme']) {
+        return build($delta);
+    }
+
+    $base = parse($basePath);
     $pick = function($part) use ($base, $delta) {
 
         if ($delta[$part]) {
@@ -35,12 +41,6 @@ function resolve(string $basePath, string $newPath) : string {
         return null;
 
     };
-
-    // If the new path defines a scheme, it's absolute and we can just return
-    // that.
-    if ($delta['scheme']) {
-        return build($delta);
-    }
 
     $newParts = [];
 
