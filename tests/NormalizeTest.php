@@ -19,6 +19,7 @@ class NormalizeTest extends \PHPUnit\Framework\TestCase {
     function normalizeData() {
 
         return [
+            ['https://example.org/',             'https://example.org/'],
             ['http://example.org/',             'http://example.org/'],
             ['HTTP://www.EXAMPLE.com/',         'http://www.example.com/'],
             ['http://example.org/%7Eevert',     'http://example.org/~evert'],
