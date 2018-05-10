@@ -39,6 +39,13 @@ class ParseTest extends \PHPUnit\Framework\TestCase {
 
     }
 
+    function testParseFallbackShouldThrowInvalidUriException() {
+        $this->expectException(\Sabre\Uri\InvalidUriException::class);
+        $this->expectExceptionMessage('Invalid, or could not parse URI');
+
+        _parse_fallback('ssh://invalid::7000/hello?foo=bar#test');
+    }
+
     function parseData() {
 
         return [
