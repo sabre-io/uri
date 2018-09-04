@@ -225,8 +225,12 @@ function build(array $parts) : string {
     $authority = '';
     if (!empty($parts['host'])) {
         $authority = $parts['host'];
-        if (!empty($parts['user'])) {
-            $authority = $parts['user'] . '@' . $authority;
+        if (!empty($parts['user'])) { // if we have an HTTP user
+            if (!empty($parts['pass'])) { // if we also have an HTTP password
+                $authority = $parts['user'] . ':' . $parts['pass'] . '@' . $authority;
+            } else {
+                $authority = $parts['user'] . '@' . $authority;
+            }
         }
         if (!empty($parts['port'])) {
             $authority = $authority . ':' . $parts['port'];
