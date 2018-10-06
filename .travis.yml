@@ -14,9 +14,12 @@ addons:
     - libzip4
 
 script:
-  - ./bin/phpunit --configuration tests/phpunit.xml.dist
+  - ./bin/phpunit --configuration tests/phpunit.xml.dist --coverage-clover=coverage.xml
   - ./bin/sabre-cs-fixer fix lib/ --dry-run --diff
 
 before_script:
   - rm -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
   - composer install
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
