@@ -1,23 +1,24 @@
-<?php declare (strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Sabre\Uri;
 
-class ResolveTest extends \PHPUnit\Framework\TestCase {
-
+class ResolveTest extends \PHPUnit\Framework\TestCase
+{
     /**
      * @dataProvider resolveData
      */
-    function testResolve($base, $update, $expected) {
-
+    public function testResolve($base, $update, $expected)
+    {
         $this->assertEquals(
             $expected,
             resolve($base, $update)
         );
-
     }
 
-    function resolveData() {
-
+    public function resolveData()
+    {
         return [
             [
                 'http://example.org/foo/baz',
@@ -103,9 +104,6 @@ class ResolveTest extends \PHPUnit\Framework\TestCase {
                 '#',
                 'http://example.org/path.json',
             ],
-
         ];
-
     }
-
 }
