@@ -22,6 +22,8 @@ namespace Sabre\Uri;
  * @param string $newPath
  *
  * @return string
+ *
+ * @throws InvalidUriException
  */
 function resolve(string $basePath, string $newPath): string
 {
@@ -113,6 +115,8 @@ function resolve(string $basePath, string $newPath): string
  * @param string $uri
  *
  * @return string
+ *
+ * @throws InvalidUriException
  */
 function normalize(string $uri): string
 {
@@ -182,6 +186,8 @@ function normalize(string $uri): string
  * @param string $uri
  *
  * @return array
+ *
+ * @throws InvalidUriException
  */
 function parse(string $uri): array
 {
@@ -302,6 +308,8 @@ function split(string $path): array
  * @param string $uri
  *
  * @return array
+ *
+ * @throws InvalidUriException
  */
 function _parse_fallback(string $uri): array
 {
