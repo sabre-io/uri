@@ -7,6 +7,7 @@ ChangeLog
 * #39: Some PHPDoc improvements.
 * PHPStan support.
 * Adopted the symfony php-cs-fixer standard.
+* Now testing against PHP 7.2 and 7.3.
 
 
 2.1.1 (2017-02-20)
