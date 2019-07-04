@@ -215,7 +215,7 @@ class ParseTest extends \PHPUnit\Framework\TestCase
                     'query' => null,
                     'fragment' => null,
                 ],
-            ]
+            ],
         ];
     }
 }
