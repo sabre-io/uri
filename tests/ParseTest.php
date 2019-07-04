@@ -192,6 +192,30 @@ class ParseTest extends \PHPUnit\Framework\TestCase
                     'fragment' => 'foo',
                 ],
             ],
+            [
+                'https://',
+                [
+                    'scheme' => 'https',
+                    'host' => null,
+                    'path' => null,
+                    'port' => null,
+                    'user' => null,
+                    'query' => null,
+                    'fragment' => null,
+                ],
+            ],
+            [
+                'https://test',
+                [
+                    'scheme' => 'https',
+                    'host' => 'test',
+                    'path' => null,
+                    'port' => null,
+                    'user' => null,
+                    'query' => null,
+                    'fragment' => null,
+                ],
+            ]
         ];
     }
 }
