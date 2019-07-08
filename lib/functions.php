@@ -373,7 +373,7 @@ function _parse_fallback(string $uri): array
         if ($matches['host']) {
             $result['host'] = $matches['host'];
         }
-        if ($matches['port']) {
+        if (isset($matches['port'])) {
             $result['port'] = (int) $matches['port'];
         }
         if (isset($matches['path'])) {
