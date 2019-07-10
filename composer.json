@@ -31,9 +31,13 @@
             "Sabre\\Uri\\" : "lib/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Sabre\\Uri\\": "tests/"
+        }
+    },
     "require-dev": {
-        "sabre/cs": "~1.0.0",
-        "phpunit/phpunit" : "^6.0"
+        "phpunit/phpunit" : "^6"
     },
     "config" : {
         "bin-dir" : "bin/"
