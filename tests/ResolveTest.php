@@ -104,6 +104,12 @@ class ResolveTest extends \PHPUnit\Framework\TestCase
                 '#',
                 'http://example.org/path.json',
             ],
+            // Allow to use 0 in path
+            [
+                'http://example.org/',
+                '0',
+                'http://example.org/0',
+            ],
         ];
     }
 }
