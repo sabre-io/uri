@@ -6,6 +6,7 @@ ChangeLog
 
 * #43: allows the path to be 0
 
+
 2.1.2 (2019-06-25)
 ------------------
 
