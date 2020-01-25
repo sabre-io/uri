@@ -10,6 +10,7 @@ bin/php-cs-fixer
 
 # Tests
 tests/cov/
+coverage.xml
 
 # Composer binaries
 bin
