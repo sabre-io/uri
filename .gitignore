@@ -2,6 +2,12 @@
 vendor/
 composer.lock
 
+# Composer binaries
+bin/phpunit
+bin/phpstan
+bin/phpstan.phar
+bin/php-cs-fixer
+
 # Tests
 tests/cov/
 
@@ -10,6 +16,9 @@ bin
 
 # Vim
 .*.swp
+
+# IDEs
+/.idea
 
 # development stuff
 .php_cs.cache
