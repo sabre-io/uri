@@ -185,7 +185,7 @@ function normalize(string $uri): string
  *
  * @param string $uri
  *
- * @return array
+ * @return array<string, string>
  *
  * @throws InvalidUriException
  */
@@ -225,7 +225,7 @@ function parse(string $uri): array
  * This function takes the components returned from PHP's parse_url, and uses
  * it to generate a new uri.
  *
- * @param array $parts
+ * @param array<string, string> $parts
  *
  * @return string
  */
@@ -283,7 +283,7 @@ function build(array $parts): string
  *
  * @param string $path
  *
- * @return array
+ * @return array<int, mixed>
  */
 function split(string $path): array
 {
@@ -307,7 +307,7 @@ function split(string $path): array
  *
  * @param string $uri
  *
- * @return array
+ * @return array<string, mixed>
  *
  * @throws InvalidUriException
  */
