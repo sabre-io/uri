@@ -25,7 +25,8 @@ before_script:
   - composer install
 
 script:
-  - if [ $RUN_PHPSTAN == "FALSE"  ]; then ./bin/phpunit --configuration tests/phpunit.xml.dist --coverage-clover=coverage.xml; fi
+  - if [ $RUN_PHPSTAN == "FALSE"  ]; then ./bin/php-cs-fixer  fix --dry-run --diff; fi
+  - if [ $RUN_PHPSTAN == "FALSE"  ]; then ./bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml; fi
   - if [ $RUN_PHPSTAN == "TRUE"  ]; then php ./bin/phpstan analyse -c phpstan.neon lib; fi
 
 after_success:
