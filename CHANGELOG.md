@@ -1,6 +1,14 @@
 ChangeLog
 =========
 
+2.2.0 (2020-01-31)
+------------------
+
+* #45 Added Support for PHP 7.4 (@phil-davis, @staabm)
+* #47: Dropped Support for PHP 7.0 (@phil-davis)
+* #49: Updated the testsuite for phpunit8 (@phil-davis)
+* #46: Added phpstan coverage (@phil-davis)
+
 2.1.3 (2019-09-05)
 ------------------
 
