@@ -8,8 +8,11 @@ class NormalizeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider normalizeData
+     *
+     * @param string $in
+     * @param string $out
      */
-    public function testNormalize($in, $out)
+    public function testNormalize($in, $out): void
     {
         $this->assertEquals(
             $out,
@@ -17,6 +20,9 @@ class NormalizeTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+    /**
+     * @return array<int, array<int, string>>
+     */
     public function normalizeData()
     {
         return [

@@ -2,25 +2,7 @@
 vendor/
 composer.lock
 
-# Composer binaries
-bin/phpunit
-bin/phpstan
-bin/phpstan.phar
-bin/php-cs-fixer
-
 # Tests
 tests/cov/
 tests/.phpunit.result.cache
-coverage.xml
-
-# Composer binaries
-bin
-
-# Vim
-.*.swp
-
-# IDEs
-/.idea
-
-# development stuff
 .php_cs.cache

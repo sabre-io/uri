@@ -8,8 +8,11 @@ class ParseTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider parseData
+     *
+     * @param string $in
+     * @param string $out
      */
-    public function testParse($in, $out)
+    public function testParse($in, $out): void
     {
         $this->assertEquals(
             $out,
@@ -19,8 +22,11 @@ class ParseTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider parseData
+     *
+     * @param string $in
+     * @param string $out
      */
-    public function testParseFallback($in, $out)
+    public function testParseFallback($in, $out): void
     {
         $result = _parse_fallback($in);
         $result = $result + [
@@ -39,7 +45,7 @@ class ParseTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testParseFallbackShouldThrowInvalidUriException()
+    public function testParseFallbackShouldThrowInvalidUriException(): void
     {
         $this->expectException(\Sabre\Uri\InvalidUriException::class);
         $this->expectExceptionMessage('Invalid, or could not parse URI');
@@ -47,7 +53,10 @@ class ParseTest extends \PHPUnit\Framework\TestCase
         _parse_fallback('ssh://invalid::7000/hello?foo=bar#test');
     }
 
-    public function parseData()
+    /**
+     * @return array<int, array<int, string|array>>
+     */
+    public function parseData(): array
     {
         return [
             [

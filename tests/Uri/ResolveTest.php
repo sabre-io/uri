@@ -8,8 +8,14 @@ class ResolveTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider resolveData
+     *
+     * @param string $base
+     * @param string $update
+     * @param string $expected
+     *
+     * @throws InvalidUriException
      */
-    public function testResolve($base, $update, $expected)
+    public function testResolve($base, $update, $expected): void
     {
         $this->assertEquals(
             $expected,
@@ -17,7 +23,10 @@ class ResolveTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function resolveData()
+    /**
+     * @return array<int, array<int, string>>
+     */
+    public function resolveData(): array
     {
         return [
             [

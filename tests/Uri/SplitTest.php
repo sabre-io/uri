@@ -6,7 +6,7 @@ namespace Sabre\Uri;
 
 class SplitTest extends \PHPUnit\Framework\TestCase
 {
-    public function testSplit()
+    public function testSplit(): void
     {
         $strings = [
             // input                    // expected result

@@ -8,15 +8,23 @@ class BuildTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider buildUriData
+     *
+     * @param string $value
      */
-    public function testBuild($value)
+    public function testBuild($value): void
     {
+        /** @var array<string, int|string> $parsedUrl */
+        $parsedUrl = parse_url($value);
+        $this->assertIsArray($parsedUrl);
         $this->assertEquals(
             $value,
-            build(parse_url($value))
+            build($parsedUrl)
         );
     }
 
+    /**
+     * @return array<int, array<int, string>>
+     */
     public function buildUriData()
     {
         return [
