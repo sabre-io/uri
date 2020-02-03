@@ -214,7 +214,7 @@ function parse(string $uri): array
  * This function takes the components returned from PHP's parse_url, and uses
  * it to generate a new uri.
  *
- * @param array<string, string> $parts
+ * @param array<string, int|string> $parts
  */
 function build(array $parts): string
 {
