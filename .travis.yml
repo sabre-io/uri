@@ -21,7 +21,7 @@ matrix:
   fast_finish: true
 
 before_script:
-  - composer update --prefer-source $PREFER_LOWEST
+  - composer update $PREFER_LOWEST
   - rm -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
 
 script:
