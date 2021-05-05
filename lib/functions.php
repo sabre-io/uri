@@ -225,7 +225,11 @@ function build(array $parts): string
     if (!empty($parts['host'])) {
         $authority = $parts['host'];
         if (!empty($parts['user'])) {
-            $authority = $parts['user'].'@'.$authority;
+            $userInformation = $parts['user'];
+            if (!empty($parts['pass'])) {
+                $userInformation .= ':'.$parts['pass'];
+            }
+            $authority = $userInformation.'@'.$authority;
         }
         if (!empty($parts['port'])) {
             $authority = $authority.':'.$parts['port'];
