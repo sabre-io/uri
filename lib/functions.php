@@ -205,6 +205,7 @@ function parse(string $uri): array
             'path' => null,
             'port' => null,
             'user' => null,
+            'pass' => null,
             'query' => null,
             'fragment' => null,
         ];
@@ -314,6 +315,7 @@ function _parse_fallback(string $uri): array
         'host' => null,
         'port' => null,
         'user' => null,
+        'pass' => null,
         'path' => null,
         'fragment' => null,
         'query' => null,
