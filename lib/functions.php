@@ -214,7 +214,7 @@ function parse(string $uri): array
  * This function takes the components returned from PHP's parse_url, and uses
  * it to generate a new uri.
  *
- * @param array<string, int|string> $parts
+ * @param array<string, int|string|null> $parts
  */
 function build(array $parts): string
 {
@@ -261,7 +261,7 @@ function build(array $parts): string
  * is used) and we need a method that just operates on UTF-8 characters.
  *
  * In addition basename and dirname are platform aware, and will treat
- * backslash (\) as a directory separator on windows.
+ * backslash (\) as a directory separator on Windows.
  *
  * This method returns the 2 components as an array.
  *
