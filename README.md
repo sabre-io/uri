@@ -5,7 +5,7 @@ sabre/uri is a lightweight library that provides several functions for working
 with URIs, staying true to the rules of [RFC3986][2].
 
 Partially inspired by [Node.js URL library][3], and created to solve real
-problems in PHP applications. 100% unitested and many tests are based on
+problems in PHP applications. 100% unit tested and many tests are based on
 examples from RFC3986.
 
 The library provides the following functions:

@@ -96,7 +96,7 @@ ChangeLog
 1.0.1 (2015-04-28)
 ------------------
 
-* #4: Using php-cs-fixer to automatically enforce conding standards.
+* #4: Using php-cs-fixer to automatically enforce coding standards.
 * #5: Resolving to and building `mailto:` urls were not correctly handled.
 
 
