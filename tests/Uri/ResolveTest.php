@@ -69,6 +69,12 @@ class ResolveTest extends \PHPUnit\Framework\TestCase
             ],
             // .. and .
             [
+                'http://example.org',
+                './bar2/../../bar3/',
+                'http://example.org/bar3/',
+            ],
+            // .. and .
+            [
                 'http://example.org/foo/bar/',
                 '../bar2/.././/bar3/',
                 'http://example.org/foo//bar3/',
