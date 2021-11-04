@@ -84,7 +84,7 @@ function resolve(string $basePath, string $newPath): string
     $path = implode('/', $newPathParts);
 
     // If the source url ended with a /, we want to preserve that.
-    $newParts['path'] = $path;
+    $newParts['path'] = 0 === strpos($path, '/') ? $path : '/'.$path;
     if ($delta['query']) {
         $newParts['query'] = $delta['query'];
     } elseif (!empty($base['query']) && empty($delta['host']) && empty($delta['path'])) {
