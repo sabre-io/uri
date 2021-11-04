@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+2.2.2 (2021-11-04)
+------------------
+
+* #69: fix issue with missing slash in URI parse (@41i-6h0rb4n1 @phil-davis)
+
 2.2.1 (2020-10-03)
 ------------------
 
