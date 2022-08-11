@@ -54,7 +54,7 @@ class ParseTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array<int, array<int, string|array>>
+     * @return array<int, array<int, array<string, int|string|null>|string>>
      */
     public function parseData(): array
     {
