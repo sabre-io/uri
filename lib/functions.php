@@ -69,7 +69,7 @@ function resolve(string $basePath, string $newPath): string
     $newPathParts = [];
     foreach ($pathParts as $pathPart) {
         switch ($pathPart) {
-            //case '' :
+            // case '' :
             case '.':
                 break;
             case '..':
