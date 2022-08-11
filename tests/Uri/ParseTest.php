@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Sabre\Uri;
 
-class ParseTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ParseTest extends TestCase
 {
     /**
      * @dataProvider parseData
      *
-     * @param string $in
-     * @param string $out
+     * @param array<int, array<int, array<string, int|string|null>|string>> $out
      */
-    public function testParse($in, $out): void
+    public function testParse(string $in, array $out): void
     {
         $this->assertEquals(
             $out,
@@ -23,10 +24,9 @@ class ParseTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider parseData
      *
-     * @param string $in
-     * @param string $out
+     * @param array<int, array<int, array<string, int|string|null>|string>> $out
      */
-    public function testParseFallback($in, $out): void
+    public function testParseFallback(string $in, array $out): void
     {
         $result = _parse_fallback($in);
         $result = $result + [

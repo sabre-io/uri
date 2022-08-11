@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Sabre\Uri;
 
-class NormalizeTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class NormalizeTest extends TestCase
 {
     /**
      * @dataProvider normalizeData
-     *
-     * @param string $in
-     * @param string $out
      */
-    public function testNormalize($in, $out): void
+    public function testNormalize(string $in, string $out): void
     {
         $this->assertEquals(
             $out,
@@ -23,7 +22,7 @@ class NormalizeTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array<int, array<int, string>>
      */
-    public function normalizeData()
+    public function normalizeData(): array
     {
         return [
             ['https://example.org/',            'https://example.org/'],
