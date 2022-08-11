@@ -309,6 +309,10 @@ function _parse_fallback(string $uri): array
         $uri
     );
 
+    if ($uri === null) {
+        throw new InvalidUriException('Invalid, or could not parse URI');
+    }
+
     $result = [
         'scheme' => null,
         'host' => null,
