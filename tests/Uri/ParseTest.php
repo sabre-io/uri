@@ -238,6 +238,18 @@ class ParseTest extends \PHPUnit\Framework\TestCase
                     'fragment' => null,
                 ],
             ],
+            [
+                'file:///C:\path\file.ext',
+                [
+                    'scheme' => 'file',
+                    'host' => '',
+                    'path' => '/C:\path\file.ext',
+                    'port' => null,
+                    'user' => null,
+                    'query' => null,
+                    'fragment' => null,
+                ],
+            ],
         ];
     }
 }
