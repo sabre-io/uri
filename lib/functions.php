@@ -196,6 +196,19 @@ function parse(string $uri): array
     $result = parse_url($uri);
     if (!$result) {
         $result = _parse_fallback($uri);
+    } else {
+        // Add empty host and trailing slash to Windows file paths
+        // file:///C:/path or file:///C:\path
+        // Note: the regex fragment [a-zA-Z]:[\/\\\\].* end up being
+        // [a-zA-Z]:[\/\\].*
+        // The 4 backslash in a row are the way to get 2 backslash into the actual string
+        // that is used as the regex. The 2 backslash are then the way to get 1 backslash
+        // character into the character set "a forward slash or a backslash"
+        if (isset($result['scheme']) && 'file' === $result['scheme'] && isset($result['path']) &&
+             preg_match('/^(?<windows_path> [a-zA-Z]:([\/\\\\].*)?)$/x', $result['path'])) {
+            $result['path'] = '/'.$result['path'];
+            $result['host'] = '';
+        }
     }
 
     return
@@ -341,15 +354,13 @@ function _parse_fallback(string $uri): array
         $result['host'] = '';
     } elseif ('//' === substr($uri, 0, 2)) {
         // Uris that have an authority part.
-        $regex = '
-          %^
+        $regex = '%^
             //
             (?: (?<user> [^:@]+) (: (?<pass> [^@]+)) @)?
             (?<host> ( [^:/]* | \[ [^\]]+ \] ))
             (?: : (?<port> [0-9]+))?
             (?<path> / .*)?
-          $%x
-        ';
+          $%x';
         if (!preg_match($regex, $uri, $matches)) {
             throw new InvalidUriException('Invalid, or could not parse URI');
         }
