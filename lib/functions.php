@@ -69,7 +69,7 @@ function resolve(string $basePath, string $newPath): string
     $newPathParts = [];
     foreach ($pathParts as $pathPart) {
         switch ($pathPart) {
-            //case '' :
+            // case '' :
             case '.':
                 break;
             case '..':
@@ -321,6 +321,10 @@ function _parse_fallback(string $uri): array
         },
         $uri
     );
+
+    if (null === $uri) {
+        throw new InvalidUriException('Invalid, or could not parse URI');
+    }
 
     $result = [
         'scheme' => null,

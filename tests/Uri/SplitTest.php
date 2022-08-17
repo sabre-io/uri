@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Sabre\Uri;
 
-class SplitTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class SplitTest extends TestCase
 {
     public function testSplit(): void
     {

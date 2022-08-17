@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Sabre\Uri;
 
-class BuildTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class BuildTest extends TestCase
 {
     /**
      * @dataProvider buildUriData
-     *
-     * @param string $value
      */
-    public function testBuild($value): void
+    public function testBuild(string $value): void
     {
         /** @var array<string, int|string> $parsedUrl */
         $parsedUrl = parse_url($value);
@@ -25,7 +25,7 @@ class BuildTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array<int, array<int, string>>
      */
-    public function buildUriData()
+    public function buildUriData(): array
     {
         return [
             ['http://example.org/'],

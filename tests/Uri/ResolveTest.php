@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace Sabre\Uri;
 
-class ResolveTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ResolveTest extends TestCase
 {
     /**
      * @dataProvider resolveData
      *
-     * @param string $base
-     * @param string $update
-     * @param string $expected
-     *
      * @throws InvalidUriException
      */
-    public function testResolve($base, $update, $expected): void
+    public function testResolve(string $base, string $update, string $expected): void
     {
         $this->assertEquals(
             $expected,
