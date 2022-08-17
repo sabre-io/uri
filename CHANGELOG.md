@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+2.3.0 (2022-08-17)
+------------------
+
+* #74: Minimum PHP 7.4 - drops PHP 7.1 7.2 and 7.3 and adds more type declarations (@phil-davis)
+
 2.2.3 (2022-08-17)
 ------------------
 
