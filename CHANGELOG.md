@@ -1,6 +1,12 @@
 ChangeLog
 =========
 
+2.2.3 (2022-08-17)
+------------------
+
+* #71: Add empty host and trailing slash to windows file paths (@peterpostmann @phil-davis)
+* #70: Update .gitattributes (@cedric-anne)
+
 2.2.2 (2021-11-04)
 ------------------
 
