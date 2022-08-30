@@ -54,8 +54,8 @@ function resolve(string $basePath, string $newPath): string
             $path = $delta['path'];
         } else {
             // Removing last component from base path.
-            $path = $base['path'];
-            $length = strrpos((string) $path, '/');
+            $path = (string) $base['path'];
+            $length = strrpos($path, '/');
             if (false !== $length) {
                 $path = substr($path, 0, $length);
             }
@@ -174,7 +174,10 @@ function normalize(string $uri): string
  * Unlike PHP's parse_url, it will also convert any non-ascii characters to
  * percent-encoded strings. PHP's parse_url corrupts these characters on OS X.
  *
- * @return array<string, string>
+ * In the return array, key "port" is an int value. Other keys have a string value.
+ * "Unused" keys have value null.
+ *
+ * @return array{scheme: string|null, host: string|null, path: string|null, port: positive-int|null, user: string|null, query: string|null, fragment: string|null}
  *
  * @throws InvalidUriException
  */
@@ -215,6 +218,16 @@ function parse(string $uri): array
         }
     }
 
+    /*
+     * phpstan is not able to process all the things that happen while this function
+     * constructs the result array. It only understands the $result is
+     * non-empty-array<string, mixed>
+     *
+     * But the detail of the returned array is correctly specified in the PHPdoc
+     * above the function call.
+     *
+     * @phpstan-ignore-next-line
+     */
     return
          $result + [
             'scheme' => null,
