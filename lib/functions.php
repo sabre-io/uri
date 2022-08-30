@@ -180,7 +180,7 @@ function normalize(string $uri): string
  */
 function parse(string $uri): array
 {
-    // Normally a URI must be ASCII, however. However, often it's not and
+    // Normally a URI must be ASCII. However, often it's not and
     // parse_url might corrupt these strings.
     //
     // For that reason we take any non-ascii characters from the uri and
@@ -192,6 +192,10 @@ function parse(string $uri): array
         },
         $uri
     );
+
+    if (null === $uri) {
+        throw new InvalidUriException('Invalid, or could not parse URI');
+    }
 
     $result = parse_url($uri);
     if (!$result) {
