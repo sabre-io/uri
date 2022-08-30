@@ -174,7 +174,10 @@ function normalize(string $uri): string
  * Unlike PHP's parse_url, it will also convert any non-ascii characters to
  * percent-encoded strings. PHP's parse_url corrupts these characters on OS X.
  *
- * @return array<string, string>
+ * In the return array, key "port" is an int value. Other keys have a string value.
+ * "Unused" keys have value null.
+ *
+ * @return array<string, mixed>
  *
  * @throws InvalidUriException
  */
