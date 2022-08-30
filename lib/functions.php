@@ -177,7 +177,7 @@ function normalize(string $uri): string
  * In the return array, key "port" is an int value. Other keys have a string value.
  * "Unused" keys have value null.
  *
- * @return array{scheme: string|null, host: string|null, path: string|null, port: int|null, user: string|null, query: string|null, fragment: string|null}
+ * @return array{scheme: string|null, host: string|null, path: string|null, port: positive-int|null, user: string|null, query: string|null, fragment: string|null}
  *
  * @throws InvalidUriException
  */
