@@ -1,6 +1,13 @@
 ChangeLog
 =========
 
+2.3.1 (2022-08-30)
+------------------
+
+* #77: Add PHP 8.2 to CI - confirms that the code is working with PHP 8.2 (@phil-davis)
+* #78: Raise phpstan to level 8  (@phil-davis)
+* #79: Specify detailed return type of parse() (@phil-davis)
+
 2.3.0 (2022-08-17)
 ------------------
 
