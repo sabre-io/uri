@@ -12,7 +12,7 @@ The library provides the following functions:
 
 1. `resolve` to resolve relative urls.
 2. `normalize` to aid in comparing urls.
-3. `parse`, which works like PHP's [parse_url][6].
+3. `parse`, which works like PHP's [parse_url][6] with special cases for some Windows-style paths [9].
 4. `build` to do the exact opposite of `parse`.
 5. `split` to easily get the 'dirname' and 'basename' of a URL without all the
    problems those two functions have.
@@ -54,3 +54,4 @@ This library is being developed by [fruux](https://fruux.com/). Drop us a line f
 [6]: http://php.net/manual/en/function.parse-url.php
 [7]: http://sabre.io/uri/install/
 [8]: http://sabre.io/uri/usage/
+[9]: https://github.com/sabre-io/uri/pull/71
