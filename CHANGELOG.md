@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+2.3.2 (2022-09-19)
+------------------
+
+* #83: Revert windows file paths change (was PR 71). See issue 81 (@phil-davis)
+
 2.3.1 (2022-08-30)
 ------------------
 
