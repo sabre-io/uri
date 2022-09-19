@@ -10,6 +10,7 @@ class ParseTest extends TestCase
 {
     /**
      * @dataProvider parseData
+     * @dataProvider windowsFormatTestCasesForParse
      *
      * @param array<int, array<int, array<string, int|string|null>|string>> $out
      */
@@ -23,6 +24,7 @@ class ParseTest extends TestCase
 
     /**
      * @dataProvider parseData
+     * @dataProvider windowsFormatTestCasesForParseFallback
      *
      * @param array<int, array<int, array<string, int|string|null>|string>> $out
      */
@@ -225,7 +227,15 @@ class ParseTest extends TestCase
                     'fragment' => null,
                 ],
             ],
-            // Windows Paths
+        ];
+    }
+
+    /**
+     * @return array<int, array<int, array<string, int|string|null>|string>>
+     */
+    public function windowsFormatTestCasesForParseFallback(): array
+    {
+        return [
             [
                 'file:///C:/path/file.ext',
                 [
@@ -256,6 +266,58 @@ class ParseTest extends TestCase
                     'scheme' => 'file',
                     'host' => '',
                     'path' => '/C:',
+                    'port' => null,
+                    'user' => null,
+                    'query' => null,
+                    'fragment' => null,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * These test cases demonstrate that the parse() function does not
+     * return a "/" at the start of the path for URIs of the form
+     * file:///C:/something...
+     *
+     * See issue comment https://github.com/sabre-io/uri/pull/71#issuecomment-1250724859
+     * and gthe linked issues and PRs.
+     *
+     * @return array<int, array<int, array<string, int|string|null>|string>>
+     */
+    public function windowsFormatTestCasesForParse(): array
+    {
+        return [
+            [
+                'file:///C:/path/file.ext',
+                [
+                    'scheme' => 'file',
+                    'host' => '',
+                    'path' => 'C:/path/file.ext',
+                    'port' => null,
+                    'user' => null,
+                    'query' => null,
+                    'fragment' => null,
+                ],
+            ],
+            [
+                'file:///C:\path\file.ext',
+                [
+                    'scheme' => 'file',
+                    'host' => '',
+                    'path' => 'C:\path\file.ext',
+                    'port' => null,
+                    'user' => null,
+                    'query' => null,
+                    'fragment' => null,
+                ],
+            ],
+            [
+                'file:///C:',
+                [
+                    'scheme' => 'file',
+                    'host' => '',
+                    'path' => 'C:',
                     'port' => null,
                     'user' => null,
                     'query' => null,
