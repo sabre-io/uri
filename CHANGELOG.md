@@ -18,6 +18,11 @@ ChangeLog
 
 * #74: Minimum PHP 7.4 - drops PHP 7.1 7.2 and 7.3 and adds more type declarations (@phil-davis)
 
+2.2.4 (2022-09-19)
+------------------
+
+* #83: Revert windows file paths change (was PR 71). See issue 81 (@phil-davis)
+
 2.2.3 (2022-08-17)
 ------------------
 
