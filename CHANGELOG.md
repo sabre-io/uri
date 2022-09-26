@@ -1,15 +1,15 @@
 ChangeLog
 =========
 
-3.0.0 (2022-09-20)
+3.0.0 (2022-09-26)
 ------------------
 
-* #82: Add empty host and leading slash to windows file paths (@peterpostmann @phil-davis)
+* #82: Add empty host and leading slash to Windows file paths (@peterpostmann @phil-davis)
 
 2.3.2 (2022-09-19)
 ------------------
 
-* #83: Revert windows file paths change (was PR 71). See issue 81 (@phil-davis)
+* #83: Revert Windows file paths change (was PR 71). See issue 81 (@phil-davis)
 
 2.3.1 (2022-08-30)
 ------------------
@@ -26,12 +26,12 @@ ChangeLog
 2.2.4 (2022-09-19)
 ------------------
 
-* #83: Revert windows file paths change (was PR 71). See issue 81 (@phil-davis)
+* #83: Revert Windows file paths change (was PR 71). See issue 81 (@phil-davis)
 
 2.2.3 (2022-08-17)
 ------------------
 
-* #71: Add empty host and trailing slash to windows file paths (@peterpostmann @phil-davis)
+* #71: Add empty host and trailing slash to Windows file paths (@peterpostmann @phil-davis)
 * #70: Update .gitattributes (@cedric-anne)
 
 2.2.2 (2021-11-04)
