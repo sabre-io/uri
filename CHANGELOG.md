@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+3.0.0 (2022-09-20)
+------------------
+
+* #82: Add empty host and leading slash to windows file paths (@peterpostmann @phil-davis)
+
 2.3.2 (2022-09-19)
 ------------------
 

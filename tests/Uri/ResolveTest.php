@@ -129,6 +129,11 @@ class ResolveTest extends TestCase
                 'file_b.ext',
                 'file:///C:/path/file_b.ext',
             ],
+            [
+                'file:///C:/path/of/dirs/',
+                'file.txt',
+                'file:///C:/path/of/dirs/file.txt',
+            ],
         ];
     }
 }
