@@ -290,7 +290,7 @@ function build(array $parts): string
  * basename() is locale aware (behaviour changes if C locale or a UTF-8 locale
  * is used) and we need a method that just operates on UTF-8 characters.
  *
- * In addition basename and dirname are platform aware, and will treat
+ * In addition, basename and dirname are platform aware, and will treat
  * backslash (\) as a directory separator on Windows.
  *
  * This method returns the 2 components as an array.
