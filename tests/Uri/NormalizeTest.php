@@ -13,7 +13,7 @@ class NormalizeTest extends TestCase
      */
     public function testNormalize(string $in, string $out): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             $out,
             normalize($in)
         );

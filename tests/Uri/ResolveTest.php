@@ -15,7 +15,7 @@ class ResolveTest extends TestCase
      */
     public function testResolve(string $base, string $update, string $expected): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             $expected,
             resolve($base, $update)
         );
