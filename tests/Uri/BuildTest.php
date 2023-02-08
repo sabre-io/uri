@@ -15,8 +15,8 @@ class BuildTest extends TestCase
     {
         /** @var array<string, int|string> $parsedUrl */
         $parsedUrl = parse_url($value);
-        $this->assertIsArray($parsedUrl);
-        $this->assertEquals(
+        self::assertIsArray($parsedUrl);
+        self::assertEquals(
             $value,
             build($parsedUrl)
         );

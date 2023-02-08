@@ -16,7 +16,7 @@ class ParseTest extends TestCase
      */
     public function testParse(string $in, array $out): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             $out,
             parse($in)
         );
@@ -41,7 +41,7 @@ class ParseTest extends TestCase
             'fragment' => null,
         ];
 
-        $this->assertEquals(
+        self::assertEquals(
             $out,
             $result
         );
