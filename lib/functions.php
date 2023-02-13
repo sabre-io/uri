@@ -26,15 +26,15 @@ function resolve(string $basePath, string $newPath): string
 
     // If the new path defines a scheme, it's absolute and we can just return
     // that.
-    if ($delta['scheme']) {
+    if (null !== $delta['scheme']) {
         return build($delta);
     }
 
     $base = parse($basePath);
     $pick = function ($part) use ($base, $delta) {
-        if ($delta[$part]) {
+        if (null !== $delta[$part]) {
             return $delta[$part];
-        } elseif ($base[$part]) {
+        } elseif (null !== $base[$part]) {
             return $base[$part];
         }
 
@@ -85,13 +85,13 @@ function resolve(string $basePath, string $newPath): string
 
     // If the source url ended with a /, we want to preserve that.
     $newParts['path'] = 0 === strpos($path, '/') ? $path : '/'.$path;
-    if ($delta['query']) {
+    if (null !== $delta['query']) {
         $newParts['query'] = $delta['query'];
     } elseif (!empty($base['query']) && empty($delta['host']) && empty($delta['path'])) {
         // Keep the old query if host and path didn't change
         $newParts['query'] = $base['query'];
     }
-    if ($delta['fragment']) {
+    if (null !== $delta['fragment']) {
         $newParts['fragment'] = $delta['fragment'];
     }
 
@@ -134,7 +134,7 @@ function normalize(string $uri): string
         $parts['path'] = '/'.implode('/', $newPathParts);
     }
 
-    if ($parts['scheme']) {
+    if (null !== $parts['scheme']) {
         $parts['scheme'] = strtolower($parts['scheme']);
         $defaultPorts = [
             'http' => '80',
@@ -157,7 +157,7 @@ function normalize(string $uri): string
         }
     }
 
-    if ($parts['host']) {
+    if (null !== $parts['host']) {
         $parts['host'] = strtolower($parts['host']);
     }
 
@@ -201,7 +201,7 @@ function parse(string $uri): array
     }
 
     $result = parse_url($uri);
-    if (!$result) {
+    if (false === $result) {
         $result = _parse_fallback($uri);
     }
 
@@ -252,7 +252,7 @@ function build(array $parts): string
         // If there's a scheme, there's also a host.
         $uri = $parts['scheme'].':';
     }
-    if ($authority || (!empty($parts['scheme']) && 'file' === $parts['scheme'])) {
+    if ('' !== $authority || (!empty($parts['scheme']) && 'file' === $parts['scheme'])) {
         // No scheme, but there is a host.
         $uri .= '//'.$authority;
     }
@@ -290,7 +290,7 @@ function build(array $parts): string
 function split(string $path): array
 {
     $matches = [];
-    if (preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u', $path, $matches)) {
+    if (1 === preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u', $path, $matches)) {
         return [$matches[1], $matches[2]];
     }
 
@@ -340,7 +340,7 @@ function _parse_fallback(string $uri): array
         'query' => null,
     ];
 
-    if (preg_match('% ^([A-Za-z][A-Za-z0-9+-\.]+): %x', $uri, $matches)) {
+    if (1 === preg_match('% ^([A-Za-z][A-Za-z0-9+-\.]+): %x', $uri, $matches)) {
         $result['scheme'] = $matches[1];
         // Take what's left.
         $uri = substr($uri, strlen($result['scheme']) + 1);
@@ -369,10 +369,10 @@ function _parse_fallback(string $uri): array
             (?: : (?<port> [0-9]+))?
             (?<path> / .*)?
           $%x';
-        if (!preg_match($regex, $uri, $matches)) {
+        if (1 !== preg_match($regex, $uri, $matches)) {
             throw new InvalidUriException('Invalid, or could not parse URI');
         }
-        if ($matches['host']) {
+        if (isset($matches['host']) && '' !== $matches['host']) {
             $result['host'] = $matches['host'];
         }
         if (isset($matches['port'])) {
@@ -381,10 +381,10 @@ function _parse_fallback(string $uri): array
         if (isset($matches['path'])) {
             $result['path'] = $matches['path'];
         }
-        if ($matches['user']) {
+        if (isset($matches['user']) && '' !== $matches['user']) {
             $result['user'] = $matches['user'];
         }
-        if ($matches['pass']) {
+        if (isset($matches['pass']) && '' !== $matches['pass']) {
             $result['pass'] = $matches['pass'];
         }
     } else {
