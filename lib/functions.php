@@ -88,13 +88,17 @@ function resolve(string $basePath, string $newPath): string
 
     // If the source url ended with a /, we want to preserve that.
     $newParts['path'] = 0 === strpos($path, '/') ? $path : '/'.$path;
-    if (null !== $delta['query']) {
+    // From PHP 8, no "?" query at all causes 'query' to be null.
+    // An empty query "http://example.com/foo?" causes 'query' to be the empty string
+    if (null !== $delta['query'] && '' !== $delta['query']) {
         $newParts['query'] = $delta['query'];
     } elseif (isset($base['query']) && !isset($delta['host']) && !isset($delta['path'])) {
         // Keep the old query if host and path didn't change
         $newParts['query'] = $base['query'];
     }
-    if (null !== $delta['fragment']) {
+    // From PHP 8, no "#" fragment at all causes 'fragment' to be null.
+    // An empty fragment "http://example.com/foo#" causes 'fragment' to be the empty string
+    if (null !== $delta['fragment'] && '' !== $delta['fragment']) {
         $newParts['fragment'] = $delta['fragment'];
     }
 
