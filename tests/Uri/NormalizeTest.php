@@ -32,6 +32,7 @@ class NormalizeTest extends TestCase
             ['http://example.org/./evert',      'http://example.org/evert'],
             ['http://example.org/../evert',     'http://example.org/evert'],
             ['http://example.org/foo/../evert', 'http://example.org/evert'],
+            ['http://example.org/0',            'http://example.org/0'],
             ['/%41',                            '/A'],
             ['/%3F',                            '/%3F'],
             ['/%3f',                            '/%3F'],
