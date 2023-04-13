@@ -83,6 +83,11 @@ class ResolveTest extends TestCase
                 '#comments',
                 'https://example.org/foo?a=b#comments',
             ],
+            [
+                'https://example.org/foo?0',
+                '#comments',
+                'https://example.org/foo?0#comments',
+            ],
             // Switching to mailto!
             [
                 'https://example.org/foo?a=b',

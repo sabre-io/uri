@@ -90,7 +90,7 @@ function resolve(string $basePath, string $newPath): string
     $newParts['path'] = 0 === strpos($path, '/') ? $path : '/'.$path;
     if (null !== $delta['query']) {
         $newParts['query'] = $delta['query'];
-    } elseif (!empty($base['query']) && empty($delta['host']) && empty($delta['path'])) {
+    } elseif (isset($base['query']) && !isset($delta['host']) && !isset($delta['path'])) {
         // Keep the old query if host and path didn't change
         $newParts['query'] = $base['query'];
     }
