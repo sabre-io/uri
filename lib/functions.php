@@ -241,32 +241,32 @@ function build(array $parts): string
     $uri = '';
 
     $authority = '';
-    if (!empty($parts['host'])) {
+    if (isset($parts['host'])) {
         $authority = $parts['host'];
-        if (!empty($parts['user'])) {
+        if (isset($parts['user'])) {
             $authority = $parts['user'].'@'.$authority;
         }
-        if (!empty($parts['port'])) {
+        if (isset($parts['port'])) {
             $authority = $authority.':'.$parts['port'];
         }
     }
 
-    if (!empty($parts['scheme'])) {
+    if (isset($parts['scheme'])) {
         // If there's a scheme, there's also a host.
         $uri = $parts['scheme'].':';
     }
-    if ('' !== $authority || (!empty($parts['scheme']) && 'file' === $parts['scheme'])) {
+    if ('' !== $authority || (isset($parts['scheme']) && 'file' === $parts['scheme'])) {
         // No scheme, but there is a host.
         $uri .= '//'.$authority;
     }
 
-    if (!empty($parts['path'])) {
+    if (isset($parts['path'])) {
         $uri .= $parts['path'];
     }
-    if (!empty($parts['query'])) {
+    if (isset($parts['query'])) {
         $uri .= '?'.$parts['query'];
     }
-    if (!empty($parts['fragment'])) {
+    if (isset($parts['fragment'])) {
         $uri .= '#'.$parts['fragment'];
     }
 
