@@ -116,7 +116,7 @@ function normalize(string $uri): string
 {
     $parts = parse($uri);
 
-    if (!empty($parts['path'])) {
+    if (isset($parts['path'])) {
         $pathParts = explode('/', ltrim($parts['path'], '/'));
         $newPathParts = [];
         foreach ($pathParts as $pathPart) {
@@ -144,7 +144,7 @@ function normalize(string $uri): string
             'https' => '443',
         ];
 
-        if (!empty($parts['port']) && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']] == $parts['port']) {
+        if (isset($parts['port']) && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']] == $parts['port']) {
             // Removing default ports.
             unset($parts['port']);
         }
@@ -152,7 +152,7 @@ function normalize(string $uri): string
         switch ($parts['scheme']) {
             case 'http':
             case 'https':
-                if (empty($parts['path'])) {
+                if (!isset($parts['path'])) {
                     // An empty path is equivalent to / in http.
                     $parts['path'] = '/';
                 }
