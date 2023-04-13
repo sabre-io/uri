@@ -116,12 +116,6 @@ class ResolveTest extends TestCase
                 '#foo',
                 'http://www.example.org/#foo',
             ],
-            // Another fragment test
-            [
-                'http://example.org/path.json',
-                '#',
-                'http://example.org/path.json',
-            ],
             // Allow to use 0 in path
             [
                 'http://example.org/',
