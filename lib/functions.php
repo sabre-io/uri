@@ -62,7 +62,10 @@ function resolve(string $basePath, string $newPath): string
             $path .= '/'.$delta['path'];
         }
     } else {
-        $path = $base['path'] ?: '/';
+        $path = $base['path'] ?? '/';
+        if ('' === $path) {
+            $path = '/';
+        }
     }
     // Removing .. and .
     $pathParts = explode('/', $path);

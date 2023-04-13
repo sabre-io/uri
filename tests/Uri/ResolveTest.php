@@ -123,6 +123,49 @@ class ResolveTest extends TestCase
                 '0',
                 'http://example.org/0',
             ],
+            // Allow to use 0 in base path
+            [
+                'http://example.org/0',
+                '//example.net',
+                'http://example.net/0',
+            ],
+            [
+                'http://example.org/0',
+                '//example.net/',
+                'http://example.net/',
+            ],
+            // Allow to use a base with only the path
+            [
+                '0',
+                '//example.net',
+                '//example.net/0',
+            ],
+            [
+                'a',
+                '//example.net',
+                '//example.net/a',
+            ],
+            [
+                '0',
+                '//example.net/',
+                '//example.net/',
+            ],
+            [
+                'a',
+                '//example.net/',
+                '//example.net/',
+            ],
+            // Allow to use an empty base
+            [
+                '',
+                '//example.net',
+                '//example.net/',
+            ],
+            [
+                '',
+                '//example.net/',
+                '//example.net/',
+            ],
             // Windows Paths
             [
                 'file:///C:/path/file_a.ext',
