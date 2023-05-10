@@ -368,14 +368,11 @@ function _parse_fallback(string $uri): array
     if ('///' === substr($uri, 0, 3)) {
         // The triple slash uris are a bit unusual, but we have special handling
         // for them.
-        /**
-         * We know that this is a string, because the first 3 characters are '///'.
-         * So we can always do a sub-string starting from offset 2 (the 3rd '/').
-         *
-         * @var string $x
-         */
-        $x = substr($uri, 2);
-        $result['path'] = $x;
+        $path = substr($uri, 2);
+        if (false === $path) {
+            throw new \RuntimeException('The string cannot be false');
+        }
+        $result['path'] = $path;
         $result['host'] = '';
     } elseif ('//' === substr($uri, 0, 2)) {
         // Uris that have an authority part.
