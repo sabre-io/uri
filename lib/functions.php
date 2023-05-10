@@ -91,7 +91,7 @@ function resolve(string $basePath, string $newPath): string
     // An empty query "http://example.com/foo?" causes 'query' to be the empty string
     if (null !== $delta['query'] && '' !== $delta['query']) {
         $newParts['query'] = $delta['query'];
-    } elseif (isset($base['query']) && null !== $delta['host'] && null !== $delta['path']) {
+    } elseif (isset($base['query']) && null === $delta['host'] && null === $delta['path']) {
         // Keep the old query if host and path didn't change
         $newParts['query'] = $base['query'];
     }
