@@ -244,12 +244,12 @@ function build(array $parts): string
     $uri = '';
 
     $authority = '';
-    if (null !== $parts['host']) {
+    if (isset($parts['host'])) {
         $authority = $parts['host'];
-        if (null !== $parts['user']) {
+        if (isset($parts['user'])) {
             $authority = $parts['user'].'@'.$authority;
         }
-        if (null !== $parts['port']) {
+        if (isset($parts['port'])) {
             $authority = $authority.':'.$parts['port'];
         }
     }
