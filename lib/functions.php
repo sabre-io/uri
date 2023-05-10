@@ -47,7 +47,6 @@ function resolve(string $basePath, string $newPath): string
     $newParts['host'] = $pick('host');
     $newParts['port'] = $pick('port');
 
-    $path = '';
     if (is_string($delta['path']) and strlen($delta['path']) > 0) {
         // If the path starts with a slash
         if ('/' === $delta['path'][0]) {
@@ -92,7 +91,7 @@ function resolve(string $basePath, string $newPath): string
     // An empty query "http://example.com/foo?" causes 'query' to be the empty string
     if (null !== $delta['query'] && '' !== $delta['query']) {
         $newParts['query'] = $delta['query'];
-    } elseif (isset($base['query']) && !isset($delta['host']) && !isset($delta['path'])) {
+    } elseif (isset($base['query']) && null !== $delta['host'] && null !== $delta['path']) {
         // Keep the old query if host and path didn't change
         $newParts['query'] = $base['query'];
     }
@@ -120,7 +119,7 @@ function normalize(string $uri): string
 {
     $parts = parse($uri);
 
-    if (isset($parts['path'])) {
+    if (null !== $parts['path']) {
         $pathParts = explode('/', ltrim($parts['path'], '/'));
         $newPathParts = [];
         foreach ($pathParts as $pathPart) {
@@ -148,7 +147,7 @@ function normalize(string $uri): string
             'https' => '443',
         ];
 
-        if (isset($parts['port']) && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']] == $parts['port']) {
+        if (null !== $parts['port'] && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']] == $parts['port']) {
             // Removing default ports.
             unset($parts['port']);
         }
@@ -156,7 +155,7 @@ function normalize(string $uri): string
         switch ($parts['scheme']) {
             case 'http':
             case 'https':
-                if (!isset($parts['path'])) {
+                if (null === $parts['path']) {
                     // An empty path is equivalent to / in http.
                     $parts['path'] = '/';
                 }
@@ -258,12 +257,12 @@ function build(array $parts): string
     $uri = '';
 
     $authority = '';
-    if (isset($parts['host'])) {
+    if (null !== $parts['host']) {
         $authority = $parts['host'];
-        if (isset($parts['user'])) {
+        if (null !== $parts['user']) {
             $authority = $parts['user'].'@'.$authority;
         }
-        if (isset($parts['port'])) {
+        if (null !== $parts['port']) {
             $authority = $authority.':'.$parts['port'];
         }
     }
@@ -327,7 +326,7 @@ function split(string $path): array
  * This function is only called if the main parse method fails. It's pretty
  * crude and probably slow, so the original parse_url is usually preferred.
  *
- * @return array<string, mixed>
+ * @return array{scheme: string|null, host: string|null, path: string|null, port: positive-int|null, user: string|null, query: string|null, fragment: string|null}
  *
  * @throws InvalidUriException
  */
@@ -364,6 +363,10 @@ function _parse_fallback(string $uri): array
         $result['scheme'] = $matches[1];
         // Take what's left.
         $uri = substr($uri, strlen($result['scheme']) + 1);
+        if (false === $uri) {
+            // There was nothing left.
+            $uri = '';
+        }
     }
 
     // Taking off a fragment part
@@ -378,7 +381,14 @@ function _parse_fallback(string $uri): array
     if ('///' === substr($uri, 0, 3)) {
         // The triple slash uris are a bit unusual, but we have special handling
         // for them.
-        $result['path'] = substr($uri, 2);
+        /**
+         * We know that this is a string, because the first 3 characters are '///'.
+         * So we can always do a sub-string starting from offset 2 (the 3rd '/').
+         *
+         * @var string $x
+         */
+        $x = substr($uri, 2);
+        $result['path'] = $x;
         $result['host'] = '';
     } elseif ('//' === substr($uri, 0, 2)) {
         // Uris that have an authority part.
@@ -396,7 +406,10 @@ function _parse_fallback(string $uri): array
             $result['host'] = $matches['host'];
         }
         if (isset($matches['port'])) {
-            $result['port'] = (int) $matches['port'];
+            $port = (int) $matches['port'];
+            if ($port > 0) {
+                $result['port'] = $port;
+            }
         }
         if (isset($matches['path'])) {
             $result['path'] = $matches['path'];
