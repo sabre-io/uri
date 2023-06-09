@@ -1,2 +1,7 @@
 parameters:
   level: 9
+  ignoreErrors:
+  -
+    message: "#^.* will always evaluate to true\\.$#"
+    path: tests/*
+    count: 1

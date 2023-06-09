@@ -32,7 +32,7 @@ class SplitTest extends TestCase
 
         foreach ($strings as $input => $expected) {
             $output = split($input);
-            $this->assertEquals($expected, $output, 'The expected output for \''.$input.'\' was incorrect');
+            self::assertEquals($expected, $output, 'The expected output for \''.$input.'\' was incorrect');
         }
     }
 }

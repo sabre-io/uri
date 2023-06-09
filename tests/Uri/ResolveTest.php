@@ -15,7 +15,7 @@ class ResolveTest extends TestCase
      */
     public function testResolve(string $base, string $update, string $expected): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             $expected,
             resolve($base, $update)
         );
@@ -83,6 +83,11 @@ class ResolveTest extends TestCase
                 '#comments',
                 'https://example.org/foo?a=b#comments',
             ],
+            [
+                'https://example.org/foo?0',
+                '#comments',
+                'https://example.org/foo?0#comments',
+            ],
             // Switching to mailto!
             [
                 'https://example.org/foo?a=b',
@@ -111,17 +116,54 @@ class ResolveTest extends TestCase
                 '#foo',
                 'http://www.example.org/#foo',
             ],
-            // Another fragment test
-            [
-                'http://example.org/path.json',
-                '#',
-                'http://example.org/path.json',
-            ],
             // Allow to use 0 in path
             [
                 'http://example.org/',
                 '0',
                 'http://example.org/0',
+            ],
+            // Allow to use 0 in base path
+            [
+                'http://example.org/0',
+                '//example.net',
+                'http://example.net/0',
+            ],
+            [
+                'http://example.org/0',
+                '//example.net/',
+                'http://example.net/',
+            ],
+            // Allow to use a base with only the path
+            [
+                '0',
+                '//example.net',
+                '//example.net/0',
+            ],
+            [
+                'a',
+                '//example.net',
+                '//example.net/a',
+            ],
+            [
+                '0',
+                '//example.net/',
+                '//example.net/',
+            ],
+            [
+                'a',
+                '//example.net/',
+                '//example.net/',
+            ],
+            // Allow to use an empty base
+            [
+                '',
+                '//example.net',
+                '//example.net/',
+            ],
+            [
+                '',
+                '//example.net/',
+                '//example.net/',
             ],
             // Windows Paths
             [
