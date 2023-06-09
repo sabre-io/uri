@@ -1,6 +1,14 @@
 ChangeLog
 =========
 
+3.0.1 (2023-06-09)
+------------------
+
+* #89: Call static assert functions with self:: (tests only) (@phil-davis)
+* #90: Implement phpstan strict rules and fix edge cases for paths that have "0" (@phil-davis)
+* #91: Use newer GitHub workflow action versions (CI only) (@phil-davis)
+* #93: Minor cs-fixer change (@phil-davis)
+
 3.0.0 (2022-09-26)
 ------------------
 
