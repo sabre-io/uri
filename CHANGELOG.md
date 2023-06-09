@@ -14,6 +14,14 @@ ChangeLog
 
 * #82: Add empty host and leading slash to Windows file paths (@peterpostmann @phil-davis)
 
+2.3.3 (2023-06-09)
+------------------
+
+* #89: Call static assert functions with self:: (tests only) (@phil-davis)
+* #90: Implement phpstan strict rules and fix edge cases for paths that have "0" (@phil-davis)
+* #91: Use newer GitHub workflow action versions (CI only) (@phil-davis)
+* #93: Minor cs-fixer change (@phil-davis)
+
 2.3.2 (2022-09-19)
 ------------------
 
