@@ -4,3 +4,4 @@ parameters:
   -
     message: "#^.* will always evaluate to true\\.$#"
     path: tests/*
+    count: 1

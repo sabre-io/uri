@@ -217,8 +217,8 @@ function parse(string $uri): array
         // The 4 backslash in a row are the way to get 2 backslash into the actual string
         // that is used as the regex. The 2 backslash are then the way to get 1 backslash
         // character into the character set "a forward slash or a backslash"
-        if (isset($result['scheme']) && 'file' === $result['scheme'] && isset($result['path']) &&
-            1 === preg_match('/^(?<windows_path> [a-zA-Z]:([\/\\\\].*)?)$/x', $result['path'])) {
+        if (isset($result['scheme']) && 'file' === $result['scheme'] && isset($result['path'])
+            && 1 === preg_match('/^(?<windows_path> [a-zA-Z]:([\/\\\\].*)?)$/x', $result['path'])) {
             $result['path'] = '/'.$result['path'];
             $result['host'] = '';
         }
