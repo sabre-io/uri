@@ -20,11 +20,16 @@ The library provides the following functions:
 
 Build status
 ------------
+![Build Status](https://github.com/sabre-io/uri/actions/workflows/ci.yml/badge.svg)
 
-| branch       | status | minimum PHP version |
-| ------------ | ------ | ------------------- |
-| master       | [![Build Status](https://travis-ci.org/sabre-io/uri.svg?branch=master)](https://travis-ci.org/sabre-io/uri) | PHP 7.0 |
-| 1.x          | [![Build Status](https://travis-ci.org/sabre-io/uri.svg?branch=1.x)](https://travis-ci.org/sabre-io/uri) | PHP 5.4.7 |
+| release | minimum PHP version |
+|---------|---------------------|
+| master  | PHP 7.4             |
+| 3.0     | PHP 7.4             |
+| 2.3     | PHP 7.4             |
+| 2.2     | PHP 7.1             |
+| 2.0,2.1 | PHP 7.0             |
+| 1.x     | PHP 5.4.7           |
 
 
 Further reading
