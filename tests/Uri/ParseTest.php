@@ -49,7 +49,7 @@ class ParseTest extends TestCase
 
     public function testParseFallbackShouldThrowInvalidUriException(): void
     {
-        $this->expectException(\Sabre\Uri\InvalidUriException::class);
+        $this->expectException(InvalidUriException::class);
         $this->expectExceptionMessage('Invalid, or could not parse URI');
 
         _parse_fallback('ssh://invalid::7000/hello?foo=bar#test');
