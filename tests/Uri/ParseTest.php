@@ -12,7 +12,7 @@ class ParseTest extends TestCase
      * @dataProvider parseData
      * @dataProvider windowsFormatTestCases
      *
-     * @param array<int, array<int, array<string, int|string|null>|string>> $out
+     * @param list<list<array<string, int|string|null>|string>> $out
      */
     public function testParse(string $in, array $out): void
     {
@@ -26,7 +26,7 @@ class ParseTest extends TestCase
      * @dataProvider parseData
      * @dataProvider windowsFormatTestCases
      *
-     * @param array<int, array<int, array<string, int|string|null>|string>> $out
+     * @param list<list<array<string, int|string|null>|string>> $out
      */
     public function testParseFallback(string $in, array $out): void
     {
@@ -56,7 +56,7 @@ class ParseTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, array<string, int|string|null>|string>>
+     * @return list<list<array<string, int|string|null>|string>>
      */
     public function parseData(): array
     {
@@ -231,7 +231,7 @@ class ParseTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, array<string, int|string|null>|string>>
+     * @return list<list<array<string, int|string|null>|string>>
      */
     public function windowsFormatTestCases(): array
     {

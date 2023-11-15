@@ -304,7 +304,7 @@ function build(array $parts): string
  * If there is no dirname, it will return an empty string. Any / appearing at
  * the end of the string is stripped off.
  *
- * @return array<int, mixed>
+ * @return list<mixed>
  */
 function split(string $path): array
 {
