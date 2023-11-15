@@ -20,7 +20,7 @@ class NormalizeTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, string>>
+     * @return list<list<string>>
      */
     public function normalizeData(): array
     {
