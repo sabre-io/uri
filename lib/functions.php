@@ -223,14 +223,14 @@ function parse(string $uri): array
      */
     return
          $result + [
-            'scheme' => null,
-            'host' => null,
-            'path' => null,
-            'port' => null,
-            'user' => null,
-            'query' => null,
-            'fragment' => null,
-        ];
+             'scheme' => null,
+             'host' => null,
+             'path' => null,
+             'port' => null,
+             'user' => null,
+             'query' => null,
+             'fragment' => null,
+         ];
 }
 
 /**
