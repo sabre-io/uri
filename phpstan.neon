@@ -1,5 +1,6 @@
 parameters:
   level: 9
+  reportUnmatchedIgnoredErrors: false
   ignoreErrors:
   -
     message: "#^.* will always evaluate to true\\.$#"
