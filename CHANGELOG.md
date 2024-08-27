@@ -1,6 +1,14 @@
 ChangeLog
 =========
 
+2.3.4 (2024-08-27)
+------------------
+
+* #111: apply cs-fixer 3.54.0 changes to v2 branch (@phil-davis)
+* #115: Add PHP 8.3 to CI for v2 branch (@phil-davis)
+* #116: Add PHP 8.4 to CI for v2 branch (@phil-davis)
+* #117: check for nullable_type_declaration (@phil-davis)
+
 2.3.3 (2023-06-09)
 ------------------
 
