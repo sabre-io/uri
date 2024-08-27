@@ -18,3 +18,7 @@ parameters:
     message: "#^Strict comparison using !== between '' and non-falsy-string will always evaluate to true\\.$#"
     path: lib/functions.php
     count: 1
+  -
+    message: "#^Strict comparison using === between false and string will always evaluate to false\\.$#"
+    path: lib/functions.php
+    count: 2
