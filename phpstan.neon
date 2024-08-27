@@ -6,3 +6,15 @@ parameters:
     message: "#^.* will always evaluate to true\\.$#"
     path: tests/*
     count: 1
+  -
+    message: "#^Offset .* in isset\\(\\) always exists and is not nullable\\.$#"
+    path: lib/functions.php
+    count: 3
+  -
+    message: "#^Result of && is always true\\.$#"
+    path: lib/functions.php
+    count: 1
+  -
+    message: "#^Strict comparison using !== between '' and non-falsy-string will always evaluate to true\\.$#"
+    path: lib/functions.php
+    count: 1
