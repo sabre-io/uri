@@ -1,6 +1,18 @@
 ChangeLog
 =========
 
+3.0.2 (2024-09-04)
+------------------
+
+* #98: Update readme and test (@phil-davis)
+* #100: Update CI and test things (@phil-davis)
+* #101: Create dependabot.yml (@DeepDiver1975)
+* #102: Bump actions/checkout from 3 to 4 (@DeepDiver1975)
+* #103: Change array<int...> to list<...> in PHP doc (@phil-davis)
+* #104: Add PHP 8.3 to CI (@phil-davis)
+* #105: add convertDeprecationsToExceptions option to unit test settings (@phil-davis)
+* and other CI and analysis/test tool changes
+
 3.0.1 (2023-06-09)
 ------------------
 
@@ -13,6 +25,14 @@ ChangeLog
 ------------------
 
 * #82: Add empty host and leading slash to Windows file paths (@peterpostmann @phil-davis)
+
+2.3.4 (2024-08-27)
+------------------
+
+* #111: apply cs-fixer 3.54.0 changes to v2 branch (@phil-davis)
+* #115: Add PHP 8.3 to CI for v2 branch (@phil-davis)
+* #116: Add PHP 8.4 to CI for v2 branch (@phil-davis)
+* #117: check for nullable_type_declaration (@phil-davis)
 
 2.3.3 (2023-06-09)
 ------------------
