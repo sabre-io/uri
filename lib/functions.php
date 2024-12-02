@@ -143,11 +143,11 @@ function normalize(string $uri): string
     if (null !== $parts['scheme']) {
         $parts['scheme'] = strtolower($parts['scheme']);
         $defaultPorts = [
-            'http' => '80',
-            'https' => '443',
+            'http' => 80,
+            'https' => 443,
         ];
 
-        if (null !== $parts['port'] && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']] == $parts['port']) {
+        if (null !== $parts['port'] && isset($defaultPorts[$parts['scheme']]) && $defaultPorts[$parts['scheme']] === $parts['port']) {
             // Removing default ports.
             unset($parts['port']);
         }

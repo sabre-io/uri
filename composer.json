@@ -37,10 +37,10 @@
         }
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.64",
-        "phpstan/phpstan": "^1.12",
-        "phpstan/phpstan-phpunit": "^1.4",
-        "phpstan/phpstan-strict-rules": "^1.6",
+        "friendsofphp/php-cs-fixer": "^3.65",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/extension-installer": "^1.4",
         "phpunit/phpunit" : "^9.6"
     },
