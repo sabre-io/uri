@@ -196,7 +196,7 @@ function parse(string $uri): array
     // uriencode them first.
     $uri = preg_replace_callback(
         '/[^[:ascii:]]/u',
-        fn($matches) => rawurlencode($matches[0]),
+        fn ($matches) => rawurlencode($matches[0]),
         $uri
     );
 
@@ -337,7 +337,7 @@ function _parse_fallback(string $uri): array
     // uriencode them first.
     $uri = preg_replace_callback(
         '/[^[:ascii:]]/u',
-        fn($matches) => rawurlencode($matches[0]),
+        fn ($matches) => rawurlencode($matches[0]),
         $uri
     );
 
