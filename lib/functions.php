@@ -196,9 +196,7 @@ function parse(string $uri): array
     // uriencode them first.
     $uri = preg_replace_callback(
         '/[^[:ascii:]]/u',
-        function ($matches) {
-            return rawurlencode($matches[0]);
-        },
+        fn($matches) => rawurlencode($matches[0]),
         $uri
     );
 
@@ -339,9 +337,7 @@ function _parse_fallback(string $uri): array
     // uriencode them first.
     $uri = preg_replace_callback(
         '/[^[:ascii:]]/u',
-        function ($matches) {
-            return rawurlencode($matches[0]);
-        },
+        fn($matches) => rawurlencode($matches[0]),
         $uri
     );
 
@@ -371,11 +367,11 @@ function _parse_fallback(string $uri): array
 
     // Taking off a fragment part
     if (false !== strpos($uri, '#')) {
-        list($uri, $result['fragment']) = explode('#', $uri, 2);
+        [$uri, $result['fragment']] = explode('#', $uri, 2);
     }
     // Taking off the query part
     if (false !== strpos($uri, '?')) {
-        list($uri, $result['query']) = explode('?', $uri, 2);
+        [$uri, $result['query']] = explode('?', $uri, 2);
     }
 
     if ('///' === substr($uri, 0, 3)) {
