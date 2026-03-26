@@ -22,7 +22,7 @@ class NormalizeTest extends TestCase
     /**
      * @return list<list<string>>
      */
-    public function normalizeData(): array
+    public static function normalizeData(): array
     {
         return [
             ['https://example.org/',            'https://example.org/'],

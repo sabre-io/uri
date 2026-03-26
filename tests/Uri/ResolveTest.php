@@ -24,7 +24,7 @@ class ResolveTest extends TestCase
     /**
      * @return list<list<string>>
      */
-    public function resolveData(): array
+    public static function resolveData(): array
     {
         return [
             [
