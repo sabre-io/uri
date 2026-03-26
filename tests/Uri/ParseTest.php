@@ -31,7 +31,7 @@ class ParseTest extends TestCase
     public function testParseFallback(string $in, array $out): void
     {
         $result = _parse_fallback($in);
-        $result = $result + [
+        $result += [
             'scheme' => null,
             'host' => null,
             'path' => null,
