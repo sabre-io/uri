@@ -1,5 +1,8 @@
 parameters:
   level: 9
+  phpVersion:
+    min: 80000
+    max: 80599
   reportUnmatchedIgnoredErrors: false
   ignoreErrors:
   -

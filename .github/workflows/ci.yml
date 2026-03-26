@@ -17,10 +17,6 @@ jobs:
         code-style: ['no']
         code-analysis: ['no']
         include:
-          - php-versions: '7.4'
-            coverage: 'none'
-            code-style: 'yes'
-            code-analysis: 'yes'
           - php-versions: '8.5'
             coverage: 'none'
             code-style: 'no'
