@@ -2,7 +2,6 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->exclude('vendor')
-    ->notName('rector.php')
     ->in(__DIR__);
 
 $config = new PhpCsFixer\Config();

@@ -15,7 +15,7 @@ return RectorConfig::configure()
         __DIR__.'/lib',
         __DIR__.'/tests',
     ])
-    ->withPhpSets(php74: true)
+    ->withPhpSets(false, false, false, false, true)
     ->withTypeCoverageLevel(0)
     ->withDeadCodeLevel(0)
     ->withCodeQualityLevel(0);
