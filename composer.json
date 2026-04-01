@@ -9,7 +9,7 @@
     "homepage": "http://sabre.io/uri/",
     "license": "BSD-3-Clause",
     "require": {
-        "php": "^7.4 || ^8.0"
+        "php": "^8.0"
     },
     "authors": [
         {
@@ -64,6 +64,9 @@
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true
+        },
+        "platform": {
+            "php": "8.0"
         }
     }
 }
