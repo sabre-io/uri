@@ -1,6 +1,13 @@
 ChangeLog
 =========
 
+3.0.3 (2026-04-01)
+------------------
+
+* #124 phpstan major version 2 (@phil-davis)
+* #127 add PHP 8.5 to CI workflows (@phil-davis)
+* #133 refactor: add and apply rector (ChristophWurst)
+
 3.0.2 (2024-09-04)
 ------------------
 
