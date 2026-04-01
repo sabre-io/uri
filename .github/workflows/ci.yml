@@ -22,12 +22,12 @@ jobs:
             coverage: 'none'
             code-style: 'yes'
             code-analysis: 'yes'
-            rector-check: 'yes'
+            rector-check: 'no'
           - php-versions: '8.5'
             coverage: 'none'
             code-style: 'no'
             code-analysis: 'yes'
-            rector-check: 'no'
+            rector-check: 'yes'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
