@@ -52,6 +52,12 @@
         "cs-fixer": [
             "php-cs-fixer fix"
         ],
+        "rector-check": [
+            "rector process --dry-run"
+        ],
+        "rector-fix": [
+            "rector process"
+        ],
         "phpunit": [
             "phpunit --configuration tests/phpunit.xml"
         ],
