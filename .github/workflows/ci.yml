@@ -19,12 +19,12 @@ jobs:
         rector-check: ['no']
         include:
           - php-versions: '8.2'
-            coverage: 'none'
+            coverage: 'pcov'
             code-style: 'yes'
             code-analysis: 'yes'
             rector-check: 'no'
           - php-versions: '8.5'
-            coverage: 'none'
+            coverage: 'pcov'
             code-style: 'no'
             code-analysis: 'yes'
             rector-check: 'yes'
