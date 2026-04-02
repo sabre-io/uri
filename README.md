@@ -24,7 +24,7 @@ Build status
 
 | release | minimum PHP version |
 |---------|---------------------|
-| master  | PHP 7.4             |
+| master  | PHP 8.2             |
 | 3.0     | PHP 7.4             |
 | 2.3     | PHP 7.4             |
 | 2.2     | PHP 7.1             |

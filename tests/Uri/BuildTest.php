@@ -25,7 +25,7 @@ class BuildTest extends TestCase
     /**
      * @return list<list<string>>
      */
-    public function buildUriData(): array
+    public static function buildUriData(): array
     {
         return [
             ['http://example.org/'],

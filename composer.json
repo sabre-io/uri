@@ -9,7 +9,7 @@
     "homepage": "http://sabre.io/uri/",
     "license": "BSD-3-Clause",
     "require": {
-        "php": "^7.4 || ^8.0"
+        "php": "^8.2"
     },
     "authors": [
         {
@@ -42,7 +42,7 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/extension-installer": "^1.4",
-        "phpunit/phpunit" : "^9.6",
+        "phpunit/phpunit" : "^10",
         "rector/rector": "^2.3"
     },
     "scripts": {
@@ -70,6 +70,9 @@
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true
+        },
+        "platform": {
+            "php": "8.2"
         }
     }
 }
