@@ -58,7 +58,7 @@ class ParseTest extends TestCase
     /**
      * @return list<list<array<string, int|string|null>|string>>
      */
-    public function parseData(): array
+    public static function parseData(): array
     {
         return [
             [
@@ -233,7 +233,7 @@ class ParseTest extends TestCase
     /**
      * @return list<list<array<string, int|string|null>|string>>
      */
-    public function windowsFormatTestCases(): array
+    public static function windowsFormatTestCases(): array
     {
         return [
             [
