@@ -1,12 +1,17 @@
 ChangeLog
 =========
 
+3.1.0 (2026-04-26)
+------------------
+* #139 add rector check (@ChristophWurst @phil-davis)
+* #140 drop PHP 7.4 8.0 8.1 and support PHP 8.2 and up (@DerDreschner @ChristophWurst @phil-davis)
+
 3.0.3 (2026-04-01)
 ------------------
 
 * #124 phpstan major version 2 (@phil-davis)
 * #127 add PHP 8.5 to CI workflows (@phil-davis)
-* #133 refactor: add and apply rector (ChristophWurst)
+* #133 refactor: add and apply rector (@ChristophWurst)
 
 3.0.2 (2024-09-04)
 ------------------
