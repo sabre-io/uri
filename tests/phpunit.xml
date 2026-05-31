@@ -4,6 +4,8 @@
          bootstrap="../vendor/autoload.php"
          beStrictAboutTestsThatDoNotTestAnything="true"
          beStrictAboutOutputDuringTests="true"
+         failOnRisky="true"
+         failOnWarning="true"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
          cacheDirectory=".phpunit.cache">
   <testsuites>
