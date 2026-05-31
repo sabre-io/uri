@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Sabre\Uri;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ResolveTest extends TestCase
 {
     /**
-     * @dataProvider resolveData
-     *
      * @throws InvalidUriException
      */
+    #[DataProvider('resolveData')]
     public function testResolve(string $base, string $update, string $expected): void
     {
         self::assertEquals(

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Sabre\Uri;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ParseTest extends TestCase
 {
     /**
-     * @dataProvider parseData
-     * @dataProvider windowsFormatTestCases
-     *
      * @param list<list<array<string, int|string|null>|string>> $out
      */
+    #[DataProvider('windowsFormatTestCases')]
+    #[DataProvider('parseData')]
     public function testParse(string $in, array $out): void
     {
         self::assertEquals(
@@ -23,11 +23,10 @@ class ParseTest extends TestCase
     }
 
     /**
-     * @dataProvider parseData
-     * @dataProvider windowsFormatTestCases
-     *
      * @param list<list<array<string, int|string|null>|string>> $out
      */
+    #[DataProvider('windowsFormatTestCases')]
+    #[DataProvider('parseData')]
     public function testParseFallback(string $in, array $out): void
     {
         $result = _parse_fallback($in);
