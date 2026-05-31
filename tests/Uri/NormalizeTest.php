@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Sabre\Uri;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class NormalizeTest extends TestCase
 {
-    /**
-     * @dataProvider normalizeData
-     */
+    #[DataProvider('normalizeData')]
     public function testNormalize(string $in, string $out): void
     {
         self::assertEquals(
