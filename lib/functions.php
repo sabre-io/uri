@@ -31,23 +31,21 @@ function resolve(string $basePath, string $newPath): string
     }
 
     $base = parse($basePath);
-    $pick = function ($part) use ($base, $delta) {
-        if (null !== $delta[$part]) {
-            return $delta[$part];
-        } elseif (null !== $base[$part]) {
-            return $base[$part];
-        }
-
-        return null;
-    };
 
     $newParts = [];
 
-    $newParts['scheme'] = $pick('scheme');
-    $newParts['host'] = $pick('host');
-    $newParts['port'] = $pick('port');
+    $newParts['scheme'] = $base['scheme'];
 
-    if (is_string($delta['path']) and strlen($delta['path']) > 0) {
+    // rfc3986, section 5.2.2: a reference that carries its own authority takes
+    // that authority and its own path. The base contributes neither, so the
+    // port has to come from the reference as well.
+    $deltaHasAuthority = null !== $delta['host'];
+    $newParts['host'] = $deltaHasAuthority ? $delta['host'] : $base['host'];
+    $newParts['port'] = $deltaHasAuthority ? $delta['port'] : $base['port'];
+
+    if ($deltaHasAuthority) {
+        $path = (string) $delta['path'];
+    } elseif (is_string($delta['path']) and strlen($delta['path']) > 0) {
         // If the path starts with a slash
         if ('/' === $delta['path'][0]) {
             $path = $delta['path'];
@@ -66,27 +64,19 @@ function resolve(string $basePath, string $newPath): string
             $path = '/';
         }
     }
-    // Removing .. and .
-    $pathParts = explode('/', $path);
-    $newPathParts = [];
-    foreach ($pathParts as $pathPart) {
-        switch ($pathPart) {
-            // case '' :
-            case '.':
-                break;
-            case '..':
-                array_pop($newPathParts);
-                break;
-            default:
-                $newPathParts[] = $pathPart;
-                break;
-        }
+
+    $path = _remove_dot_segments($path);
+
+    if ('' !== $path && !str_starts_with($path, '/')) {
+        $newParts['path'] = '/'.$path;
+    } elseif ('' === $path && !$deltaHasAuthority) {
+        // Only a reference that brought its own authority is allowed to end up
+        // with an empty path.
+        $newParts['path'] = '/';
+    } else {
+        $newParts['path'] = $path;
     }
 
-    $path = implode('/', $newPathParts);
-
-    // If the source url ended with a /, we want to preserve that.
-    $newParts['path'] = str_starts_with($path, '/') ? $path : '/'.$path;
     // From PHP 8, no "?" query at all causes 'query' to be null.
     // An empty query "http://example.com/foo?" causes 'query' to be the empty string
     if (null !== $delta['query'] && '' !== $delta['query']) {
@@ -120,24 +110,13 @@ function normalize(string $uri): string
     $parts = parse($uri);
 
     if (null !== $parts['path']) {
-        $pathParts = explode('/', ltrim($parts['path'], '/'));
-        $newPathParts = [];
-        foreach ($pathParts as $pathPart) {
-            switch ($pathPart) {
-                case '.':
-                    // skip
-                    break;
-                case '..':
-                    // One level up in the hierarchy
-                    array_pop($newPathParts);
-                    break;
-                default:
-                    // Ensuring that everything is correctly percent-encoded.
-                    $newPathParts[] = rawurlencode(rawurldecode($pathPart));
-                    break;
-            }
-        }
-        $parts['path'] = '/'.implode('/', $newPathParts);
+        $pathParts = array_map(
+            _normalize_pct_encoding(...),
+            explode('/', $parts['path'])
+        );
+        // Decoding happens first, so that a segment written as %2E%2E is
+        // recognised as a dot segment here (rfc3986, section 6.2.2.3).
+        $parts['path'] = _remove_dot_segments(implode('/', $pathParts));
     }
 
     if (null !== $parts['scheme']) {
@@ -285,6 +264,84 @@ function build(array $parts): string
     }
 
     return $uri;
+}
+
+/**
+ * Removes the complete "." and ".." segments from a path.
+ *
+ * This is the remove_dot_segments routine from rfc3986, section 5.2.4,
+ * transcribed step by step. Note that a trailing "." or ".." leaves the "/"
+ * behind (steps 2B and 2C), so "/a/b/.." normalizes to "/a/" and not to "/a".
+ */
+function _remove_dot_segments(string $path): string
+{
+    $output = '';
+    while ('' !== $path) {
+        if (str_starts_with($path, '../')) {
+            $path = substr($path, 3);
+        } elseif (str_starts_with($path, './')) {
+            $path = substr($path, 2);
+        } elseif (str_starts_with($path, '/./')) {
+            // Drops the ".", keeps the second slash. Same below for "/../".
+            $path = substr($path, 2);
+        } elseif ('/.' === $path) {
+            $path = '/';
+        } elseif (str_starts_with($path, '/../') || '/..' === $path) {
+            $path = '/..' === $path ? '/' : substr($path, 3);
+            // Drop the last segment of the output, and its preceding slash.
+            $lastSlash = strrpos($output, '/');
+            $output = false === $lastSlash ? '' : substr($output, 0, $lastSlash);
+        } elseif ('.' === $path || '..' === $path) {
+            $path = '';
+        } else {
+            // Move the first segment, leading slash included, to the output.
+            $nextSlash = strpos($path, '/', str_starts_with($path, '/') ? 1 : 0);
+            if (false === $nextSlash) {
+                $output .= $path;
+                $path = '';
+            } else {
+                $output .= substr($path, 0, $nextSlash);
+                $path = substr($path, $nextSlash);
+            }
+        }
+    }
+
+    return $output;
+}
+
+/**
+ * Normalizes the percent-encoding of a single path segment.
+ *
+ * Triplets are upper-cased and the ones that stand for an unreserved character
+ * are decoded (rfc3986, sections 6.2.2.1 and 6.2.2.2). Triplets for reserved
+ * characters are left alone: decoding one changes what the URI means, and so
+ * does encoding the character it stands for (section 2.2). Everything that is
+ * not a valid pchar (section 3.3) is percent-encoded.
+ *
+ * @throws InvalidUriException
+ */
+function _normalize_pct_encoding(string $segment): string
+{
+    $result = preg_replace_callback(
+        '/%([0-9A-Fa-f]{2})|([^A-Za-z0-9\-._~!$&\'()*+,;=:@])/',
+        function (array $matches): string {
+            if (isset($matches[2])) {
+                return rawurlencode($matches[2]);
+            }
+            $char = chr((int) hexdec($matches[1]));
+
+            return 1 === preg_match('/^[A-Za-z0-9\-._~]$/', $char)
+                ? $char
+                : '%'.strtoupper($matches[1]);
+        },
+        $segment
+    );
+
+    if (null === $result) {
+        throw new InvalidUriException('Invalid, or could not parse URI');
+    }
+
+    return $result;
 }
 
 /**

@@ -22,6 +22,78 @@ class ResolveTest extends TestCase
     }
 
     /**
+     * @throws InvalidUriException
+     */
+    #[DataProvider('rfc3986ResolveData')]
+    public function testResolveRfc3986Examples(string $reference, string $expected): void
+    {
+        self::assertEquals(
+            $expected,
+            resolve('http://a/b/c/d;p?q', $reference)
+        );
+    }
+
+    /**
+     * The reference resolution examples from rfc3986, sections 5.4.1 and 5.4.2,
+     * all against the base URI the RFC uses there.
+     *
+     * The empty reference is left out on purpose: it is the subject of open
+     * pull request #145.
+     *
+     * @return list<list<string>>
+     */
+    public static function rfc3986ResolveData(): array
+    {
+        return [
+            // 5.4.1 Normal Examples
+            ['g:h', 'g:h'],
+            ['g', 'http://a/b/c/g'],
+            ['./g', 'http://a/b/c/g'],
+            ['g/', 'http://a/b/c/g/'],
+            ['/g', 'http://a/g'],
+            ['//g', 'http://g'],
+            ['?y', 'http://a/b/c/d;p?y'],
+            ['g?y', 'http://a/b/c/g?y'],
+            ['#s', 'http://a/b/c/d;p?q#s'],
+            ['g#s', 'http://a/b/c/g#s'],
+            ['g?y#s', 'http://a/b/c/g?y#s'],
+            [';x', 'http://a/b/c/;x'],
+            ['g;x', 'http://a/b/c/g;x'],
+            ['g;x?y#s', 'http://a/b/c/g;x?y#s'],
+            ['.', 'http://a/b/c/'],
+            ['./', 'http://a/b/c/'],
+            ['..', 'http://a/b/'],
+            ['../', 'http://a/b/'],
+            ['../g', 'http://a/b/g'],
+            ['../..', 'http://a/'],
+            ['../../', 'http://a/'],
+            ['../../g', 'http://a/g'],
+            // 5.4.2 Abnormal Examples
+            ['../../../g', 'http://a/g'],
+            ['../../../../g', 'http://a/g'],
+            ['/./g', 'http://a/g'],
+            ['/../g', 'http://a/g'],
+            ['g.', 'http://a/b/c/g.'],
+            ['.g', 'http://a/b/c/.g'],
+            ['g..', 'http://a/b/c/g..'],
+            ['..g', 'http://a/b/c/..g'],
+            ['./../g', 'http://a/b/g'],
+            ['./g/.', 'http://a/b/c/g/'],
+            ['g/./h', 'http://a/b/c/g/h'],
+            ['g/../h', 'http://a/b/c/h'],
+            ['g;x=1/./y', 'http://a/b/c/g;x=1/y'],
+            ['g;x=1/../y', 'http://a/b/c/y'],
+            ['g?y/./x', 'http://a/b/c/g?y/./x'],
+            ['g?y/../x', 'http://a/b/c/g?y/../x'],
+            ['g#s/./x', 'http://a/b/c/g#s/./x'],
+            ['g#s/../x', 'http://a/b/c/g#s/../x'],
+            // The RFC gives two answers here, one for strict parsers and one
+            // for backwards compatibility. This is the strict one.
+            ['http:g', 'http:g'],
+        ];
+    }
+
+    /**
      * @return list<list<string>>
      */
     public static function resolveData(): array
@@ -125,8 +197,13 @@ class ResolveTest extends TestCase
             // Allow to use 0 in base path
             [
                 'http://example.org/0',
+                '#foo',
+                'http://example.org/0#foo',
+            ],
+            [
+                'http://example.org/0',
                 '//example.net',
-                'http://example.net/0',
+                'http://example.net',
             ],
             [
                 'http://example.org/0',
@@ -136,13 +213,18 @@ class ResolveTest extends TestCase
             // Allow to use a base with only the path
             [
                 '0',
+                '#foo',
+                '/0#foo',
+            ],
+            [
+                '0',
                 '//example.net',
-                '//example.net/0',
+                '//example.net',
             ],
             [
                 'a',
                 '//example.net',
-                '//example.net/a',
+                '//example.net',
             ],
             [
                 '0',
@@ -158,7 +240,7 @@ class ResolveTest extends TestCase
             [
                 '',
                 '//example.net',
-                '//example.net/',
+                '//example.net',
             ],
             [
                 '',
