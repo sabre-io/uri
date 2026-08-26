@@ -11,14 +11,14 @@ parameters:
     path: lib/functions.php
     count: 3
   -
-    message: "#^Result of && is always true\\.$#"
+    rawMessage: "Result of && is always true."
     path: lib/functions.php
     count: 1
   -
-    message: "#^Strict comparison using !== between '' and non-falsy-string will always evaluate to true\\.$#"
+    rawMessage: "Strict comparison using !== between '' and non-falsy-string will always evaluate to true."
     path: lib/functions.php
     count: 1
   -
-    message: "#^Strict comparison using === between false and string will always evaluate to false\\.$#"
+    rawMessage: "Strict comparison using === between false and string will always evaluate to false."
     path: lib/functions.php
     count: 2
