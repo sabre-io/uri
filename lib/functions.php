@@ -155,10 +155,8 @@ function normalize(string $uri): string
         switch ($parts['scheme']) {
             case 'http':
             case 'https':
-                if (null === $parts['path']) {
-                    // An empty path is equivalent to / in http.
-                    $parts['path'] = '/';
-                }
+                // An empty path is equivalent to / in http.
+                $parts['path'] ??= '/';
                 break;
         }
     }
