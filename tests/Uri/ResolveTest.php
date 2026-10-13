@@ -100,6 +100,16 @@ class ResolveTest extends TestCase
                 '#foo',
                 'http://www.example.org/#foo',
             ],
+            [
+                'https://example.org/foo?0',
+                '#',
+                'https://example.org/foo?0',
+            ],
+            [
+                'https://example.org/foo?0',
+                '',
+                'https://example.org/foo?0',
+            ],
             // Another fragment test
             [
                 'http://example.org/path.json',
